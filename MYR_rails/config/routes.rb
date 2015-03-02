@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  get 'android/who'
-
-  get 'android/whois'
+  get 'what', to: 'what#what'
 
   resources :coordinates
 
