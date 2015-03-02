@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'what', to: 'what#what'
+
   resources :coordinates
 
   resources :trackers
