@@ -17,3 +17,4 @@ echo migrating database
 rake db:migrate
 
 // END 
+test
