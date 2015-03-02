@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'android/who'
+
+  get 'android/whois'
+
   resources :coordinates
 
   resources :trackers
