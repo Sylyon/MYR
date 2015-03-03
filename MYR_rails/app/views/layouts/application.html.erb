@@ -18,20 +18,20 @@
     <!-- ################################################################################################ -->
     <nav id="mainav" class="fl_right">
       <ul class="clear">
-        <% if request.original_fullpath == "/home"%><li class="active"><% else %><li><% end %><a href<%= link_to "Home", home_path%></a></li>
-		<li><a class="drop" href="#">Fellow a regatta</a>
+		<%= li_actif(home_path) %><a href<%= link_to "Home", home_path%></a></li>
+		<%= li_actif([coordinates_path,missions_path]) %><a class="drop" href="#">Fellow a regatta</a>
           <ul>
-				<li><a href<%= link_to "Real-Time", coordinates_path%></a></li>
-				<li><a href<%= link_to "Replay", missions_path%></a></li>
+				<%= li_actif(coordinates_path) %><a href<%= link_to "Real-Time", coordinates_path%></a></li>
+				<%= li_actif(missions_path) %><a href<%= link_to "Replay", missions_path%></a></li>
           </ul>
         </li>
-         <li><a class="drop" href="#">My </a>
+         <%= li_actif([teams_path,members_path]) %><a class="drop" href="#">My </a>
           <ul>
-				<li><a href<%= link_to "My Team", teams_path%></a></li>
-				<li><a href<%= link_to "My Account", members_path%></a></li>
+				<%= li_actif(teams_path) %><a href<%= link_to "My Team", teams_path%></a></li>
+				<%= li_actif(members_path) %><a href<%= link_to "My Account", members_path%></a></li>
           </ul>
         </li>
-		<li><a href<%= link_to "Contact", robots_path%></a></li>
+		<%= li_actif(robots_path) %><a href<%= link_to "Contact", robots_path%></a></li>
       </ul>
     </nav>
   </header>
