@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   # get
 	  get 'home', to: 'home#show'
 	  get 'what', to: 'what#what'
+    get 'create', to: 'test#create'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
