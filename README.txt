@@ -12,9 +12,10 @@ echo Creating database
 		rails generate scaffold member name:string password:string email:string role:string logo:string team_id:integer
 		rails generate scaffold tracker token:string description:integer
 		rails generate scaffold coordinate latitude:decimal longitude:decimal datetime:datetime tracker_id:integer
+		rails generate controler What what
+		rails generate scaffold home
 
 echo migrating database
 rake db:migrate
 
 // END 
-test

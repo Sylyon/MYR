@@ -1,88 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Monitor Your Robot</title>
-  <%= stylesheet_link_tag 'styles', media: 'all', 'data-turbolinks-track' => true %>
+  <title>MYR2</title>
+  <meta charset="utf-8">
+  <%= stylesheet_link_tag    'layout/styles/layout.css', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'defaults', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-
-
 </head>
 
-<body>
-
-<div id="outer-container">
-    <div id="container">
-        <div id="header">
-
-			
-        </div>
-        <div id="nav">
-        	<div id="center-ul">
-                <ul>
-
-
-
-                </ul>
-			</div>
-        </div>
-		
-        <div id="body">
-            <div id="content">
-			  	<section class="round">
-
-				</section>
-                <%= yield %>
-            </div>
-            
-            <div class="sidebar">
-                <ul>	
-                   <li>
-                        <h4><span>Navigate</span></h4>
-                            <ul class="blocklist">
-								<li><a href<%= link_to "Teams", teams_path%></a></li>
-								<li><a href<%= link_to "Members", members_path%></a></li>
-								<li><a href<%= link_to "Robots", robots_path%></li>
-								<li><a href<%= link_to "Missions", missions_path%></a></li>
-							</ul>
-						</li>
-                    
-                    <li>
-                        <h4>About Us</h4>
-                        <ul>
-                            <li>
-                                <p style="margin: 0;">BICHOUARINE Mouad<br> <a href="http://fr.linkedin.com/in/bourdonbenoit/en"  title="BOURDON Benoit" target="_blank"><strong>BOURDON Benoit</strong></a><br> <a href="http://fr.linkedin.com/in/jeanjacquesboye/en "  title="BOYE Jean-Jacques" target="_blank"><strong>BOYE Jean-Jacques</strong></a><br> DESCOURS Quentin<br> <a href="http://fr.linkedin.com/pub/bastien-drouot/9a/306/46"  title="DROUOT Bastien" target="_blank"><strong>DROUOT Bastien</strong></a><br> STEPHAN Simon<br></p>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <h4>Sponsors</h4>
-                        <ul>
-                            <li><a href="http://www.ensta-bretagne.eu/"  title="Ensta bretagne" target="_blank"><strong>Ensta Bretagne</strong></a> - French Graduate and Post-graduate Engineering School and Research Institute based in Brest</li>
-                            <li><a href="http://www.ha.ax/text.con?iPage=28&iLan=1" title="Åland University"  target="_blank"><strong>Åland University</strong></a> - University of Applied Sciences based in Åland</li>
-                            <li><a href="http://www.sailingrobots.ax/" title="Sailing robots"  target="_blank"><strong>Åland Sailing Robots</strong></a> - Project to develop sailing robots in Åland</li>                        							
-                            <li><a href="http://wrsc2014.com/" title="WRSC 2014"  target="_blank"><strong>WRSC 2014</strong></a> - The World Robotic Sailing Championship 2014 in Galway</li>                        
-						</ul>
-                    </li>
-                    
-                </ul>
-            </div>
-            <div class="clear"></div>
-        </div>
-    
-        <div id="footer">
-            <div class="footer-content">
-                <p>&copy; SwarMon Project 2014. Design by <a href="http://www.spyka.net" target="_blank">Free CSS Templates</a> | <a href="http://www.justfreetemplates.com" target="_blank">Free Web Templates</a></p>
-            </div>
-        </div>
+<body id="top">
+<div class="wrapper row1">
+  <header id="header" class="clear"> 
+    <!-- ################################################################################################ -->
+    <div id="logo" class="fl_left">
+      <h1><i class="icon-medkit"></i> <a href="../index.html">Cortex</a></h1>
     </div>
+    <!-- ################################################################################################ -->
+    <nav id="mainav" class="fl_right">
+      <ul class="clear">
+        <% if request.original_fullpath == "/home"%><li class="active"><% else %><li><% end %><a href<%= link_to "Home", home_path%></a></li>
+		<li><a class="drop" href="#">Fellow a regatta</a>
+          <ul>
+				<li><a href<%= link_to "Real-Time", coordinates_path%></a></li>
+				<li><a href<%= link_to "Replay", missions_path%></a></li>
+          </ul>
+        </li>
+         <li><a class="drop" href="#">My </a>
+          <ul>
+				<li><a href<%= link_to "My Team", teams_path%></a></li>
+				<li><a href<%= link_to "My Account", members_path%></a></li>
+          </ul>
+        </li>
+		<li><a href<%= link_to "Contact", robots_path%></a></li>
+      </ul>
+    </nav>
+  </header>
 </div>
 
+    <!-- container body -->
+	<%= yield %>
+    <!-- END container body -->
 
 
+</div>
+
+<div class="wrapper row5">
+  <div id="copyright" class="clear"> 
+    <!-- ################################################################################################ -->
+    <p class="fl_left">Copyright &copy; 2014 - All Rights Reserved - <a href="#">Domain Name</a></p>
+    <p class="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+    <!-- ################################################################################################ --> 
+  </div>
+</div>
 </body>
-
-
-
 </html>
+
+
+
+

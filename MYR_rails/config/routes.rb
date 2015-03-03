@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'home#show'
+
   resources :coordinates
 
   resources :trackers
@@ -14,6 +16,8 @@ Rails.application.routes.draw do
   resources :missions
 
   resources :markers
+  
+  match 'home' => 'home#show', :via => [:get]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
