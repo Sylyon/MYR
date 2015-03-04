@@ -19,7 +19,7 @@ gem 'sass-rails', '~> 5.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Allow to use cookie in jquery
-gem 'jquery-cookie-rails'
+#gem 'jquery-cookie-rails'
 # jQuery plugin for drop-in fix binded events problem caused by Turbolinks
 #gem 'jquery-turbolinks'
 
