@@ -7,13 +7,6 @@ Licence: Free to use under our free template licence terms
 Licence URI: http://www.os-templates.com/template-terms
 -->
 <html>
-<head>
-<title>Cortex</title>
-<meta charset="utf-8">
-  <%= stylesheet_link_tag    'layout/styles/layout.css', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'defaults', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
 <body id="top">
 <!-- ################################################################################################ --> 
 <!-- ################################################################################################ --> 
@@ -22,7 +15,7 @@ Licence URI: http://www.os-templates.com/template-terms
 <!-- ################################################################################################ --> 
 <!-- ################################################################################################ --> 
 <!-- ################################################################################################ -->
-<div class="wrapper bgded" style="background-image:url('/stylesheets/images/demo/backgrounds/1.png');">
+<div class="wrapper bgded" style="background-image:url(<%= myBackGtroungImg %>);">
   <div id="announce" class="clear"> 
     <!-- ########################################################################################## -->
     <div class="one_third first"><a href="#">
