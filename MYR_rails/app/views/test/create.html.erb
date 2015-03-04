@@ -35,6 +35,22 @@
 </head>
 <body>
 	<button onclick="myFunction()" type="button">Click Me!</button> 
+	<button id="ajax" type="button">Go Ajax!</button> 
 	<div id="map-canvas"></div>
 </body>
+
+<script>
+$("#ajax").click(function(){
+	alert("Sending Ajax request ...");
+	$.ajax({
+		type: "GET",
+		url: "/data",
+		dataType: "json",
+		success: function(data){
+			alert(data[0].latitude);
+		}        
+	});
+	alert("End of Ajax");
+})
+</script>
 </html>
