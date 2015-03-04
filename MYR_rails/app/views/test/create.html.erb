@@ -8,18 +8,26 @@
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCo59o2hZMz28Crm8UeHRp3lRN56OOii7o">
 	</script>
 	<script type="text/javascript">
+	//---------------------GLOBAL VARIABLES-----------------------------
 	var map = null;
+	var lastDatetime = 0;
+	//------------------------------------------------------------------
 
+	//----------------------MAP INITIALIZATION-------------------------
 	function initialize() {
+		//-----------------------MAP OPTIONS-------------------------------
 		var mapOptions = {
 			center: { lat: -34.397, lng: 150.644},
 			zoom: 8
 		};
+		//-----------------------MAP CREATION------------------------------
 		map = new google.maps.Map(document.getElementById('map-canvas'),
 			mapOptions);
 	}
 
 	google.maps.event.addDomListener(window, 'load', initialize);
+	//-----------------------------------------------------------------
+
 
 	function myFunction() {
 		<% @tab.each do |coord|%>
@@ -31,26 +39,56 @@
 		map.setCenter(new google.maps.LatLng(<%=@tab.last.latitude%>,<%=@tab.last.longitude%>));
 	}
 
+	function setCenter(lat,lng){
+		map.setCenter(new google.maps.LatLng(lat,lng));
+	}
+
+	function addMarker(lat, lng){
+		var marker = new google.maps.Marker(
+		{
+			position: new google.maps.LatLng(lat,lng)
+		}
+		);
+		marker.setMap(map);
+	}
+
 	</script>
 </head>
 <body>
-	<button onclick="myFunction()" type="button">Click Me!</button> 
+	<button onclick="myFunction()" type="button">Add All coordinates!</button> 
 	<button id="ajax" type="button">Go Ajax!</button> 
+	<button id="doit" type="button">Add Marker</button> 
 	<div id="map-canvas"></div>
 </body>
 
 <script>
 $("#ajax").click(function(){
-	alert("Sending Ajax request ...");
 	$.ajax({
 		type: "GET",
 		url: "/data",
 		dataType: "json",
 		success: function(data){
 			alert(data[0].latitude);
+			alert(data[0].longitude);
 		}        
 	});
-	alert("End of Ajax");
 })
+
+$("#doit").click(function()
+{
+	$.ajax({
+		type: "GET",
+		url: "/coordinates.json",
+		dataType: "json",
+		success: function(data){
+			lat = data[0].latitude;
+			lng = data[0].longitude;
+			addMarker(lat,lng);
+			setCenter(lat,lng);
+		}        
+	});
+}
+)
+
 </script>
 </html>
