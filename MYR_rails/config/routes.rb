@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'mytest/mytest'
+
   #defauld root
 	root 'home#show'
 
@@ -23,6 +25,8 @@ Rails.application.routes.draw do
   # get
 	  get 'home', to: 'home#show'
 	  get 'what', to: 'what#what'
+    get 'preview', to: 'test#create'
+    get 'data', to: 'data#create'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
