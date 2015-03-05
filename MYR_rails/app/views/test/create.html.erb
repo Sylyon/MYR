@@ -81,6 +81,7 @@
 <body>
 	<button id="doit" type="button">Add Existing Markers</button> 
 	<button id="sendparam" type="button">Add new tasty coordinates !</button> 
+	<a href<%= link_to "Go to test", mytest_mytest_path%></a>
 	<div id="map-canvas"></div>
 </body>
 
@@ -110,12 +111,6 @@ $("#sendparam").click(function()
 		dataType: "json",
 		success: function(data){
 			if(data.length > 0){
-				/*
-			//can create a Refresh function to do the following lines
-			addAllThisMarkers(data);
-			var lastCoordinate = data[data.length-1];
-			saveLastDatetime(lastCoordinate.datetime);
-			setCenter(lastCoordinate.latitude,lastCoordinate.longitude);*/
 			refreshWithNewMarkers(data);
 		}
 	}       
@@ -123,6 +118,7 @@ $("#sendparam").click(function()
 
 }
 )
+
 //-----------------------------------------------------------------
 </script>
 </html>
