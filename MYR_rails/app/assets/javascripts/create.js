@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<style type="text/css">
-	html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
-	</style>
-	<script type="text/javascript"
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCo59o2hZMz28Crm8UeHRp3lRN56OOii7o">
-	</script>
-
-	<script type="text/javascript">
-	//---------------------GLOBAL VARIABLES-----------------------------
+//---------------------GLOBAL VARIABLES-----------------------------
 	var map = null;
 	var lastDatetime = "0";
 	//------------------------------------------------------------------
@@ -110,12 +99,3 @@ $(document).ready(function(){
 	});
 });
 //-----------------------------------------------------------------
-</script>
-</head>
-<body>
-	<button id="doit" type="button">Add Existing Markers</button> 
-	<button id="sendparam" type="button">Add new tasty coordinates !</button> 
-	<a href<%= link_to "Go to test", mytest_mytest_path%></a>
-	<div id="map-canvas"></div>
-</body>
-</html>
