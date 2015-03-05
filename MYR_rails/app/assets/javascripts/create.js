@@ -1,32 +1,37 @@
 //---------------------GLOBAL VARIABLES-----------------------------
-	var map = null;
-	var lastDatetime = "0";
+var map = null;
+var lastDatetime = "0";
 	//------------------------------------------------------------------
 
-	//----------------------GOOGLE MAP WORLD---------------------------
-	//MAP INITIALIZATION
-	function initialize() {
-		//MAP OPTIONS
-		var mapOptions = {
-			center: { lat: -34.397, lng: 150.644},
-			zoom: 8
-		};
-		//MAP CREATION
-		map = new google.maps.Map(document.getElementById('map-canvas'),
-			mapOptions);
-	}
-
-	google.maps.event.addDomListener(window, 'load', initialize);
-	//-----------------------------------------------------------------
-
 	//----------------------FUNCTIONS---------------------------
+	
 	//Setter on lastDatetime
 	function saveLastDatetime(datetime){
 		lastDatetime = datetime;
 	}
+
 	//Getter on lastDatetime
 	function getLastDatetime(){
 		return lastDatetime;
+	}
+
+	//Map initialization
+	function initializeMap() {
+		//map options
+		var mapOptions = {
+			center: { lat: -34.397, lng: 150.644},
+			zoom: 8
+		};
+		//map creation
+		map = new google.maps.Map(document.getElementById('map-canvas'),
+			mapOptions);
+	}
+
+	//scroll to top of button over the map
+	function initialScroll(){
+		$('html, body').animate({
+			scrollTop: $("#doit").offset().top
+		}, 2000);
 	}
 
 	//Set the center of the map
@@ -70,6 +75,9 @@
 //---------------------JQUERY WORLD---------------------------
 $(document).ready(function(){
 
+	//initialization
+	initializeMap();
+	initialScroll();
 
 	$("#doit").click(function(){
 		$.ajax({
