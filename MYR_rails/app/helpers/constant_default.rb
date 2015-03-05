@@ -49,7 +49,7 @@ module ConstantDefault
   def myWRSC_pach
 	"http://wrsc2014.com/".html_safe
   end
-  
+  ##########
 
   def myTitle
 	"Default Title".html_safe
@@ -87,6 +87,45 @@ module ConstantDefault
   def myContact
 	"Contact Us".html_safe
   end
-  
+  ###########
+  class MyProjectMember1
+	  attr_accessor :myName
 
+	  def initialize(items)
+		@myName = items
+	  end
+
+	  # Expose private binding() method.
+	  def get_binding
+		binding()
+	  end
+
+  end
+
+merdre = MyProjectMember1.new("items")
+
+
+  #####
+  def myAboutUs
+	"Members of the project".html_safe
+  end
+  def myQuestion1
+	"What is Monitor Your Robot ?".html_safe
+  end
+  def myAnswer1
+	"This site has been created by students of ENSTA Bretagne for the WRSC 2014 in Galway and allows anyboby to track the robots during the competition.".html_safe
+  end
+  def myQuestion2
+	"What is the WRSC ?".html_safe
+  end
+  def myAnswer2
+	"The WRSC is the World Robotic Sailing Championship. The 2014 edition takes place in Galway, Ireland between the 8th and the 13th September.".html_safe
+  end
+  def myQuestion3
+	"How can I follow the competition ?".html_safe
+  end
+  def myAnswer3
+	"To follow the WRSC 2014 in real time just click on the tab <%= link_to \"Real-Time\", view_path%> !".html_safe
+  end
+  
 end
