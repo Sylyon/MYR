@@ -1,5 +1,5 @@
 module ApplicationHelper
-
+  include ConstantDefault
   def li_actif(myPachList)
 	rep = "<li>".html_safe
 	if myPachList.class == Array
