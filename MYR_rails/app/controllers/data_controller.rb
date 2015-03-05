@@ -3,10 +3,8 @@ class DataController < ApplicationController
   	if params[:datetime] != nil
 
   		newCoords = Coordinate.where "datetime > ?", params[:datetime]
+  		render json: newCoords.to_json
 
-  		#render json: params[:datetime]
-  		render json: newCoords
-  		#does not work due to bad format for datetime
   	end
   end
 end

@@ -46,6 +46,14 @@
 		marker.setMap(map);
 	}
 
+	function addAllThisMarkers(data){
+		for(i=0; i < data.length ; i++){
+			lat = data[i].latitude;
+			lng = data[i].longitude;
+			addMarker(lat,lng);
+		}
+	}
+
 	//Save the last datetime
 	function saveLastDatetime(datetime){
 		lastDatetime = datetime;
@@ -53,8 +61,8 @@
 	</script>
 </head>
 <body>
-	<button id="doit" type="button">Add Marker</button> 
-	<button id="sendparam" type="button">Send Parameter</button> 
+	<button id="doit" type="button">Add Existing Markers</button> 
+	<button id="sendparam" type="button">Add new tasty coordinates !</button> 
 	<div id="map-canvas"></div>
 </body>
 
@@ -67,12 +75,7 @@ $("#doit").click(function()
 		url: "/coordinates.json",
 		dataType: "json",
 		success: function(data){
-			for(i=0; i < data.length ; i++){
-				lat = data[i].latitude;
-				lng = data[i].longitude;
-				addMarker(lat,lng);
-			}
-			//check if do not bug with parameters
+			addAllThisMarkers(data);
 			saveLastDatetime(data[data.length-1].datetime);
 			setCenter(lat,lng);
 		}        
@@ -82,16 +85,23 @@ $("#doit").click(function()
 
 $("#sendparam").click(function()
 {
-	alert("lets try");
 	$.ajax({
 		type: "GET",
-		url: "/data?datetime=20160101",
+		url: "/data?datetime="+lastDatetime,
 		dataType: "json",
 		success: function(data){
-			alert(data);
-			alert("jai affiché un truc là non ?");
-		}       
-	});
+			alert("my last datetime is"+lastDatetime);
+			alert("receive data of size:"+data.length);
+			alert("data is: "+data);
+			if(data.length > 0){
+			//can create a Refresh function to do the following lines
+			addAllThisMarkers(data);
+			//alert(data[data.length-1].datetime);
+			saveLastDatetime(data[data.length-1].datetime);
+			setCenter(lat,lng);
+		}
+	}       
+});
 }
 )
 //-----------------------------------------------------------------

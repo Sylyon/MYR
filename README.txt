@@ -14,6 +14,10 @@ echo Creating database
 		rails generate scaffold coordinate latitude:decimal longitude:decimal datetime:datetime tracker_id:integer
 		rails generate controler What what
 		rails generate scaffold home
+		rails g migration RemoveLatitudeFromCoordinates latitude:decimal 
+		rails g migration RemoveLongitudeFromCoordinates longitude:decimal
+		rails g migration AddLatidudeToCoordinates latitude:float
+		rails g migration AddLongitudeToCoordinates longitude:float
 
 echo migrating database
 rake db:migrate
