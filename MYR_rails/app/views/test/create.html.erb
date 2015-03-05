@@ -10,7 +10,7 @@
 	<script type="text/javascript">
 	//---------------------GLOBAL VARIABLES-----------------------------
 	var map = null;
-	var lastDatetime = 0;
+	var lastDatetime = "0";
 	//------------------------------------------------------------------
 
 	//----------------------GOOGLE MAP WORLD---------------------------
@@ -30,6 +30,14 @@
 	//-----------------------------------------------------------------
 
 	//----------------------FUNCTIONS---------------------------
+	//Setter on lastDatetime
+	function saveLastDatetime(datetime){
+		lastDatetime = datetime;
+	}
+	//Getter on lastDatetime
+	function getLastDatetime(){
+		return lastDatetime;
+	}
 
 	//Set the center of the map
 	function setCenter(lat, lng){
@@ -46,6 +54,7 @@
 		marker.setMap(map);
 	}
 
+	//Add all the given coordinates onto the map
 	function addAllThisMarkers(data){
 		for(i=0; i < data.length ; i++){
 			lat = data[i].latitude;
@@ -54,10 +63,19 @@
 		}
 	}
 
-	//Save the last datetime
-	function saveLastDatetime(datetime){
-		lastDatetime = datetime;
+	//Add the given coordiantes on the map and save this last state
+	function refreshWithNewMarkers(data){
+		var lastCoordinate = data[data.length-1];
+		var lastDate = lastCoordinate.datetime;
+		var lastLat = lastCoordinate.latitude;
+		var lastLng= lastCoordinate.longitude;
+
+		addAllThisMarkers(data);
+		setCenter(lastLat,lastLng);
+
+		saveLastDatetime(lastDate);
 	}
+
 	</script>
 </head>
 <body>
@@ -87,21 +105,22 @@ $("#sendparam").click(function()
 {
 	$.ajax({
 		type: "GET",
-		url: "/data?datetime="+lastDatetime,
+		url: "/data",
+		data: "datetime="+getLastDatetime(),
 		dataType: "json",
 		success: function(data){
-			alert("my last datetime is"+lastDatetime);
-			alert("receive data of size:"+data.length);
-			alert("data is: "+data);
 			if(data.length > 0){
+				/*
 			//can create a Refresh function to do the following lines
 			addAllThisMarkers(data);
-			//alert(data[data.length-1].datetime);
-			saveLastDatetime(data[data.length-1].datetime);
-			setCenter(lat,lng);
+			var lastCoordinate = data[data.length-1];
+			saveLastDatetime(lastCoordinate.datetime);
+			setCenter(lastCoordinate.latitude,lastCoordinate.longitude);*/
+			refreshWithNewMarkers(data);
 		}
 	}       
 });
+
 }
 )
 //-----------------------------------------------------------------
