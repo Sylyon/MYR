@@ -11,6 +11,7 @@ $(document).ready(function(){
 	initialScroll();
 
 	$("#doit").click(function(){
+		alert("coucou");
 		$.ajax({
 			type: "GET",
 			url: "/coordinates.json",

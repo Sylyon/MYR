@@ -25,23 +25,41 @@
 	//scroll to top of button over the map
 	function initialScroll(){
 		$('html, body').animate({
-			scrollTop: $("#doit").offset().top
+			//carefull on the name of the HTML object here
+			scrollTop: $("button").offset().top
 		}, 2000);
 	}
 
 	//Set the center of the map
 	function setCenter(lat, lng){
-		map.setCenter(new google.maps.LatLng(lat,lng));
+		map.panTo(new google.maps.LatLng(lat,lng));
 	}
 
 	//Add a marker to the map
+	//give one or two arguments ??
 	function addMarker(lat, lng){
 		var marker = new google.maps.Marker(
 		{
 			position: new google.maps.LatLng(lat,lng)
 		}
 		);
+		//always needed ?
 		marker.setMap(map);
+		//ADDED
+		return marker;
+	}
+
+	//Add a draggable marker to the map
+	function addDraggableMarker(lat, lng){
+		var marker = new google.maps.Marker(
+		{
+			position: new google.maps.LatLng(lat,lng),
+			draggable: true
+		}
+		);
+		//always needed ?
+		marker.setMap(map);
+		return marker;
 	}
 
 	//Add all the given coordinates onto the map
