@@ -1,17 +1,18 @@
 require 'yaml'
 require 'erb'
-puts "config_log.rb Start"
+puts "config_static.rb Start"
 
-PATHFILE_YAML = "config/"
+PATHFILE_YAML = "lib/generator/config_variables/"
+PATHFILE_IN ="lib/generator/template/"
+PATHFILE_OUT = "app/helpers/"
+
 FILENAME_YAML = "config.yaml"
-PATHFILE_IN ="public/stylesheets/pages/"
 FILENAME_IN = "test.html.erb"
-PATHFILE_OUT = "public/stylesheets/pages/"
-FILENAME_OUT = "test_output.html.erb"
+FILENAME_OUT = "test_output.rb"
 
 data = YAML::load(File.open(PATHFILE_YAML+FILENAME_YAML))
-myVar1= data["back_ground"]
-myVar2=data["CSS"]
+myVar1=data["bonjour"]
+myVar2=data["ppppp"]["toto"]
 myVar3= data["CSS"]
 inputfile = File.open(PATHFILE_IN+FILENAME_IN)
 outfile = File.open(PATHFILE_OUT+FILENAME_OUT,"w")
