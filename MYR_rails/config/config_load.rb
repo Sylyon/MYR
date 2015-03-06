@@ -10,6 +10,9 @@ PATHFILE_OUT = "public/stylesheets/pages/"
 FILENAME_OUT = "test_output.html.erb"
 
 data = YAML::load(File.open(PATHFILE_YAML+FILENAME_YAML))
+myVar1= data["back_ground"]
+myVar2=data["CSS"]
+myVar3= data["CSS"]
 inputfile = File.open(PATHFILE_IN+FILENAME_IN)
 outfile = File.open(PATHFILE_OUT+FILENAME_OUT,"w")
 
