@@ -18,6 +18,10 @@ echo Creating database
 		rails g migration RemoveLongitudeFromCoordinates longitude:decimal
 		rails g migration AddLatidudeToCoordinates latitude:float
 		rails g migration AddLongitudeToCoordinates longitude:float
+		rails g migration RemoveLatitudeFromMarkers latitude:decimal 
+		rails g migration RemoveLongitudeFromMarkers longitude:decimal
+		rails g migration AddLatidudeToMarkers latitude:float
+		rails g migration AddLongitudeToMarkers longitude:float
 
 echo migrating database
 rake db:migrate

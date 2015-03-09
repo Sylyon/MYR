@@ -1,8 +1,9 @@
 //----------------------GLOBAL VARIABLES-------------------
 var map = null;
+var lastDatetime = "0";
 
 //----------------------FUNCTIONS---------------------------
-	
+
 	//Setter on lastDatetime
 	function saveLastDatetime(datetime){
 		lastDatetime = datetime;
@@ -87,20 +88,29 @@ var map = null;
 		saveLastDatetime(lastDate);
 	}
 
-	function addBoil(){
-			google.maps.event.addListener(map, 'click', function(a){
-		var clickLat = a.latLng.lat();
-		var clickLng = a.latLng.lng();
-		setCenter(clickLat,clickLng);
+	//Add a boil on the map when clicked and keep track of coordinates on dragend
+	//Save the coodinates in the database when clinking on "AddBoil" button
+	function addingBoil(){
+		google.maps.event.addListener(map, 'click', function(a){
+			var desiredLat = a.latLng.lat();
+			var desiredLng = a.latLng.lng();
+			setCenter(desiredLat,desiredLng);
 
-		var marker = addDraggableMarker(clickLat,clickLng);
-		google.maps.event.addListener(marker, 'dragend', function(a){
-			var markerLat = a.latLng.lat();
-			var markerLng = a.latLng.lng();
-			console.log(markerLat+" and "+markerLng);
+			var marker = addDraggableMarker(desiredLat,desiredLng);
+			google.maps.event.addListener(marker, 'dragend', function(a){
+				var markerLat = a.latLng.lat();
+				var markerLng = a.latLng.lng();
+
+				desiredLat = markerLat;
+				desiredLng = markerLng;
+			}
+			);
+
+			$("#AddBoil").click(function(){
+				alert(desiredLat+" and "+desiredLng);
+				//need to save it in the data base
+			});
+
 		}
 		);
-
-	}
-	);
 	}
