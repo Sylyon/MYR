@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'admin_markers/show'
-
-  get 'mytest/mytest'
-
   #defauld root
 	root 'home#show'
 
@@ -27,8 +23,14 @@ Rails.application.routes.draw do
   # get
 	  get 'home', to: 'home#show'
 	  get 'what', to: 'what#what'
-    get 'preview', to: 'test#create'
+    get 'real-time', to: 'real_time#real-time'
+
+  #work in progress
     get 'data', to: 'data#create'
+    get 'admin_markers/show'
+
+    get 'choiceteams', to: 'real_time#choiceteams'
+    get 'choicerobots', to: 'real_time#choicerobots'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

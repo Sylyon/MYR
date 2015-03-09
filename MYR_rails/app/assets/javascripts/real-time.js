@@ -3,9 +3,10 @@ $(document).ready(function(){
 	//initialization
 	initializeMap();
 	initialScroll();
+	$("#refresh0").click();
+  $("#refreshteams").click();
 
 	$("#doit").click(function(){
-		alert("coucou");
 		$.ajax({
 			type: "GET",
 			url: "/coordinates.json",

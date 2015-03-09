@@ -259,7 +259,6 @@ a:hover .hexagon i{color:rgba(0,0,0,0.5);}
 .pagination a, .pagination strong{border-color:#E8EAF0;}
 .pagination .current{color:#FFFFFF; background-color:#000000;}
 
-
 /* Tables + Comments */
 table, th, td, #comments .avatar, #comments input, #comments textarea{border-color:#E8EAF0;}
 th{color:#FFFFFF; background-color:#373737;}
