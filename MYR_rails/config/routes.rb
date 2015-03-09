@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
     get 'choiceteams', to: 'real_time#choiceteams'
     get 'choicerobots', to: 'real_time#choicerobots'
+    get 'updatemapp', to: 'real_time#updatemapp'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
