@@ -1,3 +1,6 @@
+//----------------------GLOBAL VARIABLES-------------------
+var map = null;
+
 //----------------------FUNCTIONS---------------------------
 	
 	//Setter on lastDatetime
@@ -82,4 +85,22 @@
 		setCenter(lastLat,lastLng);
 
 		saveLastDatetime(lastDate);
+	}
+
+	function addBoil(){
+			google.maps.event.addListener(map, 'click', function(a){
+		var clickLat = a.latLng.lat();
+		var clickLng = a.latLng.lng();
+		setCenter(clickLat,clickLng);
+
+		var marker = addDraggableMarker(clickLat,clickLng);
+		google.maps.event.addListener(marker, 'dragend', function(a){
+			var markerLat = a.latLng.lat();
+			var markerLng = a.latLng.lng();
+			console.log(markerLat+" and "+markerLng);
+		}
+		);
+
+	}
+	);
 	}
