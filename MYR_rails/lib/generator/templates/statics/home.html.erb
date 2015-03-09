@@ -15,20 +15,25 @@ Licence URI: http://www.os-templates.com/template-terms
 <!-- ################################################################################################ --> 
 <!-- ################################################################################################ --> 
 <!-- ################################################################################################ -->
-<div class="wrapper bgded" style="background-image:url(<%= myBackGtroungImg %>);">
+<div class="wrapper bgded" style="background-image:url(<%= data["home"]["background"]["picture"] %>);">
 
   <div id="announce" class="clear"> 
 	<!-- ########################################################################################## -->
-	<div class="one_third first"><a href="<%= home_path%>">
+	<div class="one_third first"><a href="<%= data["realTime"]["link"]%>">
 	  <div class="hexagon"><i class="icon-play-sign"></i>
-		<p class="nospace"><strong><%= myRealTime %></strong><br><%= myRealTime_shortText %></p>
+		<p class="nospace"><strong><%= data["home"]["hexagons"][0]["name"] %></strong><br><%= data["home"]["hexagons"][0]["text"] %></p>
 	  </div>
 	  </a></div>
-	<div class="one_third "><a href="#">
+	<div class="one_third "><a href="<%= data["replay"]["link"]%>">
 	  <div class="hexagon"><i class="icon-calendar"></i>
-		<p class="nospace"><strong><%= myReplay %></strong><br><%= myReplay_shortText %></p>
+		<p class="nospace"><strong><%= data["home"]["hexagons"][1]["name"] %></strong><br><%= data["home"]["hexagons"][1]["text"] %></p>
 	  </div>
 	  </a></div>
+      <div class="one_third "><a href="<%= data["login"]["link"]%>">
+    <div class="hexagon"><i class="icon-calendar"></i>
+    <p class="nospace"><strong><%= data["home"]["hexagons"][2]["name"] %></strong><br><%= data["home"]["hexagons"][2]["text"] %></p>
+    </div>
+    </a></div>
 	<!-- ########################################################################################## --> 
   </div>
 
@@ -42,19 +47,19 @@ Licence URI: http://www.os-templates.com/template-terms
     <!-- ########################################################################################## -->
     <div class="clear center">
       <div class="one_third first">
-        <div class="boxedicon"><a href="<%= myENSTA_Bretagne_pach%>"><img class="imgSponsorLogo" src= <%= myENSTA_Bretagne_logo %> ></div>
-        <h2 class="nospace push15 uppercase"><strong><%= myENSTA_Bretagne %></strong></h2></a>
-        <p><%= myENSTA_Bretagne_shortText %></p>
+        <div class="boxedicon"><a href="<%= data["sponsors"][0]["link"]%>"><img class="imgSponsorLogo" src= <%=  data["sponsors"][0]["picture"] %> ></div>
+        <h2 class="nospace push15 uppercase"><strong><%=  data["sponsors"][0]["name"] %></strong></h2></a>
+        <p><%=  data["sponsors"][0]["description"] %></p>
       </div>
       <div class="one_third">
-        <div class="boxedicon"><a href="<%= myWRSC_pach %>"><img class="imgSponsorLogo" src= <%= myWRSC_logo %> ></div>
-        <h2 class="nospace push15 uppercase"><strong><%= myWRSC %></strong></h2></a>
-        <p><%= myWRSC_shortText %></p>
+        <div class="boxedicon"><a href="<%= data["sponsors"][1]["link"] %>"><img class="imgSponsorLogo" src= <%= data["sponsors"][1]["picture"] %> ></div>
+        <h2 class="nospace push15 uppercase"><strong><%= data["sponsors"][1]["name"] %></strong></h2></a>
+        <p><%= data["sponsors"][1]["description"] %></p>
       </div>
 	  <div class="one_third">
-        <div class="boxedicon"><a href="<%= myAland_pach%>"><img class="imgSponsorLogo" src= <%= myAland_logo %> ></div>
-        <h2 class="nospace push15 uppercase"><strong><%= myAland %></strong></h2></a>
-        <p><%= myAland_shortText %></p>
+        <div class="boxedicon"><a href="<%= data["sponsors"][2]["link"]%>"><img class="imgSponsorLogo" src= <%= data["sponsors"][2]["picture"] %> ></div>
+        <h2 class="nospace push15 uppercase"><strong><%= data["sponsors"][2]["name"] %></strong></h2></a>
+        <p><%= data["sponsors"][2]["description"] %></p>
       </div>
     </div>
 	
@@ -70,12 +75,12 @@ Licence URI: http://www.os-templates.com/template-terms
   <footer id="footer" class="clear"> 
     <!-- ################################################################################################ -->
     <div class="one_half first">
-      <h6 class="title"><%= myQuestion1 %></h6>
-      <p><%= myAnswer1 %></p><br>
-	  <h6 class="title"><%= myQuestion2 %></h6>
-      <p><%= myAnswer2 %></p><br>
-	  <h6 class="title"><%= myQuestion3 %></h6>
-      <p><%= myAnswer3 %></p>
+      <h6 class="title"><%= data["home"]["questions"][0]["question"] %></h6>
+      <p><%= data["home"]["questions"][0]["answer"] %></p><br>
+	  <h6 class="title"><%= data["home"]["questions"][1]["question"] %></h6>
+      <p><%= data["home"]["questions"][1]["answer"] %></p><br>
+	  <h6 class="title"><%= data["home"]["questions"][2]["question"] %></h6>
+      <p><%= data["home"]["questions"][2]["answer"] %> <a href="<%=  data["realTime"]["link"] %>"> <%= data["realTime"]["name"]%> </a> !</p>
     </div>
     <div class="one_half">
 

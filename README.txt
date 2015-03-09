@@ -14,6 +14,8 @@ echo Creating database
 		rails generate scaffold coordinate latitude:decimal longitude:decimal datetime:datetime tracker_id:integer
 		rails generate controler What what
 		rails generate scaffold home
+		rails destroy scaffold home
+		rails generate controller StaticPages home contact
 
 echo migrating database
 rake db:migrate

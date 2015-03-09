@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'home', to: 'static_pages#home'
+
+  get 'contact', to: 'static_pages#contact'
+
   get 'mytest/mytest'
 
   #defauld root
-	root 'home#show'
+	#root 'home'
 
   # Resources
 	  resources :coordinates
@@ -23,7 +27,7 @@ Rails.application.routes.draw do
 	  resources :markers
   
   # get
-	  get 'home', to: 'home#show'
+    
 	  get 'what', to: 'what#what'
     get 'preview', to: 'test#create'
     get 'data', to: 'data#create'

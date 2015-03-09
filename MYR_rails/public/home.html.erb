@@ -15,20 +15,25 @@ Licence URI: http://www.os-templates.com/template-terms
 <!-- ################################################################################################ --> 
 <!-- ################################################################################################ --> 
 <!-- ################################################################################################ -->
-<div class="wrapper bgded" style="background-image:url(<%= myBackGtroungImg %>);">
+<div class="wrapper bgded" style="background-image:url(/stylesheets/images/demo/backgrounds/1.png);">
 
   <div id="announce" class="clear"> 
 	<!-- ########################################################################################## -->
-	<div class="one_third first"><a href="<%= home_path%>">
+	<div class="one_third first"><a href="<%= members_path%>">
 	  <div class="hexagon"><i class="icon-play-sign"></i>
-		<p class="nospace"><strong><%= myRealTime %></strong><br><%= myRealTime_shortText %></p>
+		<p class="nospace"><strong>Real Time</strong><br>Click here to follow the WRSC 2015</p>
 	  </div>
 	  </a></div>
-	<div class="one_third "><a href="#">
+	<div class="one_third "><a href="<%= members_path%>">
 	  <div class="hexagon"><i class="icon-calendar"></i>
-		<p class="nospace"><strong><%= myReplay %></strong><br><%= myReplay_shortText %></p>
+		<p class="nospace"><strong>Replay</strong><br>Click here to replay an event of the WRSC 2015</p>
 	  </div>
 	  </a></div>
+      <div class="one_third "><a href="<%= members_path%>">
+    <div class="hexagon"><i class="icon-calendar"></i>
+    <p class="nospace"><strong>Login or Signin</strong><br>If you are a competitor you can create an account to add/join your team</p>
+    </div>
+    </a></div>
 	<!-- ########################################################################################## --> 
   </div>
 
@@ -42,19 +47,19 @@ Licence URI: http://www.os-templates.com/template-terms
     <!-- ########################################################################################## -->
     <div class="clear center">
       <div class="one_third first">
-        <div class="boxedicon"><a href="<%= myENSTA_Bretagne_pach%>"><img class="imgSponsorLogo" src= <%= myENSTA_Bretagne_logo %> ></div>
-        <h2 class="nospace push15 uppercase"><strong><%= myENSTA_Bretagne %></strong></h2></a>
-        <p><%= myENSTA_Bretagne_shortText %></p>
+        <div class="boxedicon"><a href="http://www.ensta-bretagne.eu/"><img class="imgSponsorLogo" src= /stylesheets/images/default/Logo_ENSTA_Bretagne.jpg ></div>
+        <h2 class="nospace push15 uppercase"><strong>ENSTA Bretagne</strong></h2></a>
+        <p>French Graduate and Post-graduate Engineering School and Research Institute based in Brest</p>
       </div>
       <div class="one_third">
-        <div class="boxedicon"><a href="<%= myWRSC_pach %>"><img class="imgSponsorLogo" src= <%= myWRSC_logo %> ></div>
-        <h2 class="nospace push15 uppercase"><strong><%= myWRSC %></strong></h2></a>
-        <p><%= myWRSC_shortText %></p>
+        <div class="boxedicon"><a href="http://wrsc2014.com/"><img class="imgSponsorLogo" src= /stylesheets/images/default/Logo_WRSC.jpg ></div>
+        <h2 class="nospace push15 uppercase"><strong>WRSC</strong></h2></a>
+        <p>World Robotic Sailing Championship</p>
       </div>
 	  <div class="one_third">
-        <div class="boxedicon"><a href="<%= myAland_pach%>"><img class="imgSponsorLogo" src= <%= myAland_logo %> ></div>
-        <h2 class="nospace push15 uppercase"><strong><%= myAland %></strong></h2></a>
-        <p><%= myAland_shortText %></p>
+        <div class="boxedicon"><a href="http://www.ha.ax/text.con?iPage=28&iLan=1"><img class="imgSponsorLogo" src= /stylesheets/images/default/Logo_Aland2.png ></div>
+        <h2 class="nospace push15 uppercase"><strong>Aland University</strong></h2></a>
+        <p>University of Applied Sciences based in Åland</p>
       </div>
     </div>
 	
@@ -70,12 +75,12 @@ Licence URI: http://www.os-templates.com/template-terms
   <footer id="footer" class="clear"> 
     <!-- ################################################################################################ -->
     <div class="one_half first">
-      <h6 class="title"><%= myQuestion1 %></h6>
-      <p><%= myAnswer1 %></p><br>
-	  <h6 class="title"><%= myQuestion2 %></h6>
-      <p><%= myAnswer2 %></p><br>
-	  <h6 class="title"><%= myQuestion3 %></h6>
-      <p><%= myAnswer3 %></p>
+      <h6 class="title">What is Monitor Your Robot ?</h6>
+      <p>This site has been created by students of ENSTA Bretagne for the WRSC 2014 in Galway and allows anyboby to track the robots during the competition.</p><br>
+	  <h6 class="title">What is the WRSC ?</h6>
+      <p>The WRSC is the World Robotic Sailing Championship. The 2014 edition takes place in Galway, Ireland between the 8th and the 13th September.</p><br>
+	  <h6 class="title">How can I follow the competition ?</h6>
+      <p>To follow the WRSC 2014 in real time just click on the tab  <a href="<%= members_path%>"> Real Time </a> !</p>
     </div>
     <div class="one_half">
 
