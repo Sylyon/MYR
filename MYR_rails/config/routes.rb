@@ -30,6 +30,14 @@ Rails.application.routes.draw do
     get 'preview', to: 'test#create'
     get 'data', to: 'data#create'
 
+  #match
+    match 'real_time' => 'real_time#real_time', :via => [:get]
+    match 'mapp' => 'real_time#mapp', :via => [:get]
+    match 'infowindow' => 'real_time#infowindow', :via => [:get]
+    match 'choiceteams' => 'real_time#choiceteams', :via => [:get]
+    match 'choicerobots' => 'real_time#choicerobots', :via => [:get]
+    match 'updatemapp' => 'real_time#updatemapp', :via => [:get]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

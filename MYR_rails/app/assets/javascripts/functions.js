@@ -22,7 +22,8 @@ var lastDatetime = "0";
 			zoom: 8
 		};
 		//map creation
-		map = new google.maps.Map(document.getElementById('map-canvas'),
+		//WARNING !!!!!!!!!!!!!!!!!! changed map-canvas by map
+		map = new google.maps.Map(document.getElementById('map'),
 			mapOptions);
 	}
 
