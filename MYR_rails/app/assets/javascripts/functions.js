@@ -108,9 +108,21 @@ var lastDatetime = "0";
 
 			$("#AddBoil").click(function(){
 				alert(desiredLat+" and "+desiredLng);
-				//need to save it in the data base
-			});
+
+			//to be completed using partial or jquery UI
+			$.ajax({
+				url: '/markers',
+				type: 'POST',
+				data: $.param({
+					marker: {
+						name: "test"
+					}
+				}),
+				success: function(data) { alert("Marker has ben succesfully created"); }
+				});
+
+		});
 
 		}
 		);
-	}
+}
