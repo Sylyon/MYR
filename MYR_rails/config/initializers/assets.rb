@@ -11,3 +11,5 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( markersCreation.js )
 Rails.application.config.assets.precompile += %w( real-time.js )
 Rails.application.config.assets.precompile += %w( choiceteams.js )
+Rails.application.config.assets.precompile += %w( choicerobots.js )
+Rails.application.config.assets.precompile += %w( updatemap.js )

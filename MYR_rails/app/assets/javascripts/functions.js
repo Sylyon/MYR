@@ -54,7 +54,66 @@ function isPresent(id,str){
     }
   }
 }
+
+//----------------------------ADD AND REMOVE ROBOTS--------------------------------
+function addrobot(id){
+  var str = $.cookie("robotslist");
+  if(isPresent(id,str) == true){
+  }//do nothing
+  else{
+    //si le cookie est inexistant ou vide
+    if($.cookie("robotslist") == null || $.cookie("robotslist") == ""){
+      $.cookie("robotslist",id);
+      }
+      //sinon ajout
+    else{
+      $.cookie("robotslist",$.cookie("robotslist")+","+id);
+    }
+  }
+}
+
+function rmvrobot(id){
+  var str = $.cookie("robotslist");
+  var tab = str.split(",");
+  //index de l'élément à retirer
+  var index = tab.indexOf(id);
+  if(index > -1){
+    //retirer élément
+    tab.splice(index,1);
+    res = tab.toString();
+    $.cookie("robotslist",res);
+  }
+}
+//-------------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------------
+function isPresent(id,str){
+  if (str == null || str == ""){
+    return false; //absent
+  }
+  else{
+    var tab = str.split(",");
+    var index = tab.indexOf(id);
+    if(index > -1){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+}
+//-------------------------------------------------------------------------------
+
 //------------------END SWARMON------------------------------
+
+//-------------------GUI----------------------------------------
+jQuery.expr.filters.offscreen = function(el) {
+  return (
+              (el.offsetLeft + el.offsetWidth) < 0 
+              || (el.offsetTop + el.offsetHeight) < 0
+              || (el.offsetLeft > window.innerWidth || el.offsetTop > window.innerHeight)
+         );
+};
 
 //-------------GETTERS AND SETTERS----------------------------
 	//Setter on lastDatetime
