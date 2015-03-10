@@ -26,7 +26,6 @@ Rails.application.routes.draw do
 
   #work in progress
 
-
     get 'data', to: 'data#create'
     #get 'admin_markers/show'
 
@@ -34,6 +33,9 @@ Rails.application.routes.draw do
     get 'choiceteams', to: 'real_time_old#choiceteams'
     get 'choicerobots', to: 'real_time_old#choicerobots'
     get 'updatemapp', to: 'real_time_old#updatemapp'
+
+
+    get 'real_time/show'
 
     get 'gatherCoords', to: 'coordinates#gatherCoords'
 
