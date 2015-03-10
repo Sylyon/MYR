@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get 'home', to: 'static_pages#home'
     get 'contact', to: 'static_pages#contact'
     get 'what', to: 'what#what'
+=begin
     get 'preview', to: 'test#create'
 
     get 'data', to: 'data#create'
@@ -36,12 +37,13 @@ Rails.application.routes.draw do
     get 'updatemapp', to: 'real_time_old#updatemapp'
 
 
-    get 'real_time/show'
+    get 'real-time', to: 'real_time#show'
 
     get 'gatherCoords', to: 'coordinates#gatherCoords'
 
     #get 'admin_markers/show'
-    get 'mytest/mytest'
+    #get 'mytest/mytest'
+=end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
