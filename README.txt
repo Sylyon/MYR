@@ -22,6 +22,9 @@ echo Creating database
 		rails g migration RemoveLongitudeFromMarkers longitude:decimal
 		rails g migration AddLatidudeToMarkers latitude:float
 		rails g migration AddLongitudeToMarkers longitude:float
+		rails destroy scaffold home
+		rails generate controller StaticPages home contact
+
 
 echo migrating database
 rake db:migrate

@@ -15,26 +15,28 @@ Licence URI: http://www.os-templates.com/template-terms
 <!-- ################################################################################################ --> 
 <!-- ################################################################################################ --> 
 <!-- ################################################################################################ -->
-<div class="wrapper bgded" style="background-image:url(<%= myBackGtroungImg %>);">
+<div class="wrapper bgded" style="background-image:url(<%= data["home"]["background"]["picture"] %>);">
+
   <div id="announce" class="clear"> 
-    <!-- ########################################################################################## -->
-    <div class="one_third first"><a href="#">
-      <div class="hexagon"><i class="icon-ambulance"></i>
-        <p class="nospace">Aenean semper elementum tellus, ut placerat leo. Quisque vehicula, urna sit amet pulvinar dapibus.</p>
-      </div>
-      </a></div>
-    <div class="one_third"><a href="#">
-      <div class="hexagon"><i class="icon-user-md"></i>
-        <p class="nospace">Aenean semper elementum tellus, ut placerat leo. Quisque vehicula, urna sit amet pulvinar dapibus.</p>
-      </div>
-      </a></div>
-    <div class="one_third"><a href="#">
-      <div class="hexagon"><i class="icon-stethoscope"></i>
-        <p class="nospace">Aenean semper elementum tellus, ut placerat leo. Quisque vehicula, urna sit amet pulvinar dapibus.</p>
-      </div>
-      </a></div>
-    <!-- ########################################################################################## --> 
+	<!-- ########################################################################################## -->
+	<div class="one_third first"><a href="<%= data["realTime"]["link"]%>">
+	  <div class="hexagon"><i class="icon-play-sign"></i>
+		<p class="nospace"><strong><%= data["home"]["hexagons"][0]["name"] %></strong><br><%= data["home"]["hexagons"][0]["text"] %></p>
+	  </div>
+	  </a></div>
+	<div class="one_third "><a href="<%= data["replay"]["link"]%>">
+	  <div class="hexagon"><i class="icon-calendar"></i>
+		<p class="nospace"><strong><%= data["home"]["hexagons"][1]["name"] %></strong><br><%= data["home"]["hexagons"][1]["text"] %></p>
+	  </div>
+	  </a></div>
+      <div class="one_third "><a href="<%= data["login"]["link"]%>">
+    <div class="hexagon"><i class="icon-calendar"></i>
+    <p class="nospace"><strong><%= data["home"]["hexagons"][2]["name"] %></strong><br><%= data["home"]["hexagons"][2]["text"] %></p>
+    </div>
+    </a></div>
+	<!-- ########################################################################################## --> 
   </div>
+
 </div>
 <!-- ################################################################################################ --> 
 <!-- ################################################################################################ --> 
@@ -45,21 +47,22 @@ Licence URI: http://www.os-templates.com/template-terms
     <!-- ########################################################################################## -->
     <div class="clear center">
       <div class="one_third first">
-        <div class="boxedicon"><a href="#"><i class="icon-eye-open icon-3x"></i></a></div>
-        <h2 class="nospace push15 uppercase">Lorem Ipsum Dolor</h2>
-        <p>Aenean semper elementum tellus, ut placerat leo. Quisque vehicula, urna sit amet pulvinar dapibus, dui leo egestas augue, eget molestie augue diam nec ante. Fusce quis feugiat urna curabitur a sapien.</p>
+        <div class="boxedicon"><a href="<%= data["sponsors"][0]["link"]%>"><img class="imgSponsorLogo" src= <%=  data["sponsors"][0]["picture"] %> ></div>
+        <h2 class="nospace push15 uppercase"><strong><%=  data["sponsors"][0]["name"] %></strong></h2></a>
+        <p><%=  data["sponsors"][0]["description"] %></p>
       </div>
       <div class="one_third">
-        <div class="boxedicon"><a href="#"><i class="icon-cogs icon-3x"></i></a></div>
-        <h2 class="nospace push15 uppercase">Lorem Ipsum Dolor</h2>
-        <p>Aenean semper elementum tellus, ut placerat leo. Quisque vehicula, urna sit amet pulvinar dapibus, dui leo egestas augue, eget molestie augue diam nec ante. Fusce quis feugiat urna curabitur a sapien.</p>
+        <div class="boxedicon"><a href="<%= data["sponsors"][1]["link"] %>"><img class="imgSponsorLogo" src= <%= data["sponsors"][1]["picture"] %> ></div>
+        <h2 class="nospace push15 uppercase"><strong><%= data["sponsors"][1]["name"] %></strong></h2></a>
+        <p><%= data["sponsors"][1]["description"] %></p>
       </div>
-      <div class="one_third">
-        <div class="boxedicon"><a href="#"><i class="icon-headphones icon-3x"></i></a></div>
-        <h2 class="nospace push15 uppercase">Lorem Ipsum Dolor</h2>
-        <p>Aenean semper elementum tellus, ut placerat leo. Quisque vehicula, urna sit amet pulvinar dapibus, dui leo egestas augue, eget molestie augue diam nec ante. Fusce quis feugiat urna curabitur a sapien.</p>
+	  <div class="one_third">
+        <div class="boxedicon"><a href="<%= data["sponsors"][2]["link"]%>"><img class="imgSponsorLogo" src= <%= data["sponsors"][2]["picture"] %> ></div>
+        <h2 class="nospace push15 uppercase"><strong><%= data["sponsors"][2]["name"] %></strong></h2></a>
+        <p><%= data["sponsors"][2]["description"] %></p>
       </div>
     </div>
+	
     <!-- ########################################################################################## --> 
     <!-- / container body -->
     <div class="clear"></div>
@@ -72,12 +75,16 @@ Licence URI: http://www.os-templates.com/template-terms
   <footer id="footer" class="clear"> 
     <!-- ################################################################################################ -->
     <div class="one_half first">
-      <h6 class="title">Lorem ipsum dolor</h6>
-      <img class="imgl pad5 borderedbox" src="images/demo/100x100.gif" alt="">
-      <p>Aenean semper elementum tellus, ut placerat leo. Quisque vehicula, urna sit amet pulvinar dapibus, dui leo egestas augue, eget molestie augue diam nec ante. Fusce quis feugiat urna.</p>
-      <p>Curabitur a sapien tincidunt, ullamcorper mauris sit amet, ornare augue. Suspendisse potenti. Sed eget ultricies sem. Proin quis lacus egestas, adipiscing nunc ornare, gravida diam. Donec luctus convallis rhoncus.</p>
+      <h6 class="title"><%= data["home"]["questions"][0]["question"] %></h6>
+      <p><%= data["home"]["questions"][0]["answer"] %></p><br>
+	  <h6 class="title"><%= data["home"]["questions"][1]["question"] %></h6>
+      <p><%= data["home"]["questions"][1]["answer"] %></p><br>
+	  <h6 class="title"><%= data["home"]["questions"][2]["question"] %></h6>
+      <p><%= data["home"]["questions"][2]["answer"] %> <a href="<%=  data["realTime"]["link"] %>"> <%= data["realTime"]["name"]%> </a> !</p>
     </div>
-    <div class="one_quarter">
+    <div class="one_half">
+
+
       <h6 class="title">Lorem ipsum dolor</h6>
       <address class="push30">
       Company Name<br>
