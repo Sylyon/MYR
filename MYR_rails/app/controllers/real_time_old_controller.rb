@@ -1,4 +1,4 @@
-class RealTimeController < ApplicationController
+class RealTimeOldController < ApplicationController
 
 def show
 		#--------------------------------------------------------------

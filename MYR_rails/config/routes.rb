@@ -23,15 +23,17 @@ Rails.application.routes.draw do
   # get
 	  get 'home', to: 'home#show'
 	  get 'what', to: 'what#what'
-    get 'real-time', to: 'real_time#show'
 
   #work in progress
+
+
     get 'data', to: 'data#create'
     #get 'admin_markers/show'
 
-    get 'choiceteams', to: 'real_time#choiceteams'
-    get 'choicerobots', to: 'real_time#choicerobots'
-    get 'updatemapp', to: 'real_time#updatemapp'
+    get 'real-time-old', to: 'real_time_old#show'
+    get 'choiceteams', to: 'real_time_old#choiceteams'
+    get 'choicerobots', to: 'real_time_old#choicerobots'
+    get 'updatemapp', to: 'real_time_old#updatemapp'
 
     get 'gatherCoords', to: 'coordinates#gatherCoords'
 
