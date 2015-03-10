@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   # get
 	  get 'home', to: 'home#show'
 	  get 'what', to: 'what#what'
-    get 'real-time', to: 'real_time#real-time'
+    get 'real-time', to: 'real_time#show'
 
   #work in progress
     get 'data', to: 'data#create'
