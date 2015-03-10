@@ -1,53 +1,4 @@
 
-//------------------------------CHOICE TEAMS---------------------------------------
-//------------------------ ADD AND REMOVE TEAMS------------------------------------
-function addteam(id){
-  var str = $.cookie("teamslist");
-  if(isPresent(id,str) == true){
-  }//do nothing
-  else{
-    //si le cookie est inexistant ou vide
-    if($.cookie("teamslist") == null || $.cookie("teamslist") == ""){
-      $.cookie("teamslist",id);
-      }
-      //sinon ajout
-    else{
-      $.cookie("teamslist",$.cookie("teamslist")+","+id);
-    }
-  }
-}
-
-function rmvteam(id){
-  var str = $.cookie("teamslist");
-  var tab = str.split(",");
-  //index de l'élément à retirer
-  var index = tab.indexOf(id);
-  if(index > -1){
-    //retirer élément
-    tab.splice(index,1);
-    res = tab.toString();
-    $.cookie("teamslist",res);
-  }
-}
-//-------------------------------------------------------------------------------
-
-//-------------------------------------------------------------------------------
-function isPresent(id,str){
-  if (str == null || str == ""){
-    return false; //absent
-  }
-  else{
-    var tab = str.split(",");
-    var index = tab.indexOf(id);
-    if(index > -1){
-      return true;
-    }
-    else{
-      return false;
-    }
-  }
-}
-
 //-------------------  ACTIONS OF THE CHECKBOXES -------------------------------
 //pour toutes les checkboxes
   $( "input[name*='team']" ).each(function () { 
@@ -57,7 +8,6 @@ function isPresent(id,str){
       var id = $(this).attr('id');
       //si coché
       if($(this).is(':checked')){
-        alert("hello");
         addteam(id);
       }
       //si décoché

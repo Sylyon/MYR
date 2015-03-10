@@ -27,11 +27,13 @@ Rails.application.routes.draw do
 
   #work in progress
     get 'data', to: 'data#create'
-    get 'admin_markers/show'
+    #get 'admin_markers/show'
 
     get 'choiceteams', to: 'real_time#choiceteams'
     get 'choicerobots', to: 'real_time#choicerobots'
     get 'updatemapp', to: 'real_time#updatemapp'
+
+    get 'gatherCoords', to: 'coordinates#gatherCoords'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

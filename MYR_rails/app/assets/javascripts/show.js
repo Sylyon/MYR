@@ -3,7 +3,7 @@ $(document).ready(function(){
 	//initialization
 	initializeMap();
 	initialScroll();
-	$("#refresh0").click();
+
   $("#refreshteams").click();
 
 	$("#doit").click(function(){
@@ -22,7 +22,7 @@ $(document).ready(function(){
 	$("#sendparam").click(function(){
 		$.ajax({
 			type: "GET",
-			url: "/data",
+			url: "/gatherCoords",
 			data: "datetime="+getLastDatetime(),
 			dataType: "json",
 			success: function(data){

@@ -1,7 +1,7 @@
  $("#updatebutton").click(function() {
  	$.ajax({
  		type: "GET",
- 		url: "/data",
+ 		url: "/gatherCoords",
  		data: "datetime="+getLastDatetime(),
  		dataType: "json",
  		success: function(data){
@@ -14,3 +14,7 @@
  		initialScroll();
  	}
  });
+
+$(document).ready(function(){
+  $("#updatebutton").click();
+ })
