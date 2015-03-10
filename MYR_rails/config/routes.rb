@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   #defauld root
-    root 'home'
+    root 'static_pages#home'  
 
   # Resources
     resources :coordinates
