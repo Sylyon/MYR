@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     get 'updatemapp', to: 'real_time_old#updatemapp'
 
 
-    get 'real_time/show'
+    get 'real-time', to: 'real_time#show'
 
     get 'gatherCoords', to: 'coordinates#gatherCoords'
 

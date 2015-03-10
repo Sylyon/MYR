@@ -22,6 +22,8 @@ echo Creating database
 		rails g migration RemoveLongitudeFromMarkers longitude:decimal
 		rails g migration AddLatidudeToMarkers latitude:float
 		rails g migration AddLongitudeToMarkers longitude:float
+		rails g migration AddStartToMissions start:datetime
+		rails g migration AddEndToMissions end:datetime
 
 echo migrating database
 rake db:migrate
