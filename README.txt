@@ -24,6 +24,10 @@ echo Creating database
 		rails g migration AddLongitudeToMarkers longitude:float
 		rails destroy scaffold home
 		rails generate controller StaticPages home contact
+		rails generate scaffold session
+		rails g migration AddPasswordDigestToMembers password_digest:string
+		rails g migration RemovePasswordFromMembers password:string
+
 
 
 echo migrating database

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309101934) do
+ActiveRecord::Schema.define(version: 20150311000224) do
 
   create_table "attempts", force: :cascade do |t|
     t.string   "name"
@@ -33,11 +33,6 @@ ActiveRecord::Schema.define(version: 20150309101934) do
     t.float    "longitude"
   end
 
-  create_table "homes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "markers", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -51,13 +46,13 @@ ActiveRecord::Schema.define(version: 20150309101934) do
 
   create_table "members", force: :cascade do |t|
     t.string   "name"
-    t.string   "password"
     t.string   "email"
     t.string   "role"
     t.string   "logo"
     t.integer  "team_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "password_digest"
   end
 
   create_table "missions", force: :cascade do |t|
@@ -71,6 +66,11 @@ ActiveRecord::Schema.define(version: 20150309101934) do
     t.string   "name"
     t.string   "category"
     t.integer  "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
