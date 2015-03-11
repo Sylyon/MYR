@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%= javascript_include_tag 'show', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'real_time', 'data-turbolinks-track' => true %>
 </head>
 <body>
 <% missionsArray = getCurrentMission %>
 <% nbMissions = missionsArray.size %>
 	<% if ( nbMissions > 0 ) %>
 		<% if missionsArray.size > 1 %>
-			<p>Select the mission to display
+			<p>Cannot display multiple missions at a time</p>
+			<p>Current missions are: 
 				<select name="Select mission" id="dropdown">
 					<option></option>
 				<% for m in missionsArray %>
@@ -29,6 +30,8 @@
 		<h1>No mission in progress currently.</h1>
 		<p>Please come back later !</p>
 	<% end %>
+
+	<button id="getMissionLength" type="button">Get all the coordinates for the current mission</button> 
 
 	<div id="map-canvas"></div>
 
