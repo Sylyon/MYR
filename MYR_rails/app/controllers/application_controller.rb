@@ -72,7 +72,7 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-=begin    
+   
   def authenticateA_M
     authenticate_or_request_with_http_basic do |name, password|
       if m=Member.find_by_name(name) 

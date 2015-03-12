@@ -27,6 +27,7 @@ echo Creating database
 		rails generate scaffold session
 		rails g migration AddPasswordDigestToMembers password_digest:string
 		rails g migration RemovePasswordFromMembers password:string
+		rails g migration AddLeaderToTeam leader_id:integer
 
 
 
