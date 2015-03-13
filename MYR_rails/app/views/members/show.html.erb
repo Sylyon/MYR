@@ -1,13 +1,12 @@
 <p id="notice"><%= notice %></p>
-
+<p>
+<% if @member.logo!="" && @member.logo!=nil %>
+  <img src=<%= @member.logo %>>
+<% end %>
+</p>
 <p>
   <strong>Name:</strong>
   <%= @member.name %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @member.password %>
 </p>
 
 <p>
@@ -21,14 +20,16 @@
 </p>
 
 <p>
-  <strong>Logo:</strong>
-  <%= @member.logo %>
-</p>
-
-<p>
   <strong>Team:</strong>
-  <%= @member.team_id %>
+  <% myVar= Team.find_by_id(@member.team_id) %>
+  <% if myVar != nil %>
+    <%= myVar.name %>
+  <% else %>
+    <%= "" %>
+  <% end %>
 </p>
 
-<%= link_to 'Edit', edit_member_path(@member) %> |
+<% if sign_in? && (is_admin? || @member.id == cookies.signed[:user_id]) %>
+  <%= link_to 'Edit', edit_member_path(@member) %> |
+<% end %>
 <%= link_to 'Back', members_path %>

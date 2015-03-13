@@ -90,7 +90,7 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-=begin  
+
   def authenticateA_M2(nameTeam)
 	  if m=Team.find_by_name(name) 
 		if(isInTeam? || is_admin?)
@@ -122,12 +122,15 @@ class ApplicationController < ActionController::Base
   def authenticateA_P2(myMember)
 	rep=false
 	m=Member.find_by_name(myMember.name)
-	if (m.id == cookies.signed[:user_id] )
-		rep=true
-	elsif (is_admin?)
-		rep = true
+	if m != nil
+		if (m.id == cookies.signed[:user_id] )
+			rep=true
+		elsif (is_admin?)
+			rep = true
+		end
 	end
 	return rep
   end
-=end
+
+  
 end

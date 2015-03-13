@@ -244,8 +244,14 @@ module SessionsHelper
   	return allTrakersAvailable
   end
 
+  def allMembersInATeam(myTeamId)
+	rep=[]
+	if Member.first != nil
+		rep= Member.where(team_id: myTeamId).ids
+	end
+	return rep
+  end
 
-=begin
   def sortId(tabId)
 	rep=tabId
 	if cookies[:Sort] == "Name" || cookies[:Sort] == "Namebis"
@@ -360,17 +366,7 @@ module SessionsHelper
 	return rep
   end
   
-  def allMembersInATeam(myTeamId)
-	rep=[]
-	allTeamsId=Team.ids
-	if Team.find_by_id(myTeamId) != nil
-		rep=stringToTab(Team.find_by_id(myTeamId).teammembers)
-	end
-	return rep
-  end
-  
 
-  
   def sortIdByTeam(tabId)
 	rep=[]
 	cal1=[] 
@@ -390,7 +386,8 @@ module SessionsHelper
 		teamNamesSort=teamNames.sort
 
 		for i in 0 .. (teamNamesSort.size-1)
-			cal1 = cal1 + stringToTab(Team.find_by_name(teamNamesSort[i]).teammembers) # tout les membre qui on une team, trié
+			myVar = Team.find_by_name(teamNamesSort[i])
+			cal1=cal1+Member.where(team_id: myVar.id).ids# tout les membre qui on une team, trié
 			if cal1 != []
 				for ii in 0..cal1.size-1
 					cal1[ii]=cal1[ii].to_i
@@ -425,7 +422,7 @@ module SessionsHelper
 		end
 		teamNamesSort=teamNames.sort
 		for i in 0 .. (teamNamesSort.size-1)
-			rep << Team.find_by_name(teamNamesSort[i]).id # tout les membre qui on une team, trié
+			rep << Team.find_by_name(teamNamesSort[i]).id 
 		end
 	end
 	return rep
@@ -442,7 +439,7 @@ module SessionsHelper
 		end
 		robotNamesSort=robotNames.sort
 		for i in 0 .. (robotNamesSort.size-1)
-			rep << Robot.find_by_name(robotNamesSort[i]).id # tout les membre qui on une team, trié
+			rep << Robot.find_by_name(robotNamesSort[i]).id
 		end
 	end
 	return rep
@@ -460,15 +457,15 @@ module SessionsHelper
 		for i in 0 .. (tabRobotId.size-1)
 			if  Robot.find_by_id(tabRobotId[i]) != nil
 				cate=Robot.find_by_id(tabRobotId[i]).category
-				if cate == "small"
+				if cate == "Small"
 					smalls << tabRobotId[i]
 				
-				elsif cate == "medium"
+				elsif cate == "Medium"
 					mediums << tabRobotId[i]
 				
-				elsif cate = "big"
+				elsif cate = "Big"
 					bigs << tabRobotId[i]
-				elsif
+				elsif cate == "Motor"
 					motors << tabRobotId[i]
 				else
 					others << tabRobotId[i]
@@ -479,7 +476,7 @@ module SessionsHelper
 	end
 	return rep
   end
-  
+=begin  
   def sortRobotByTracker(tabRobotId)
 	rep=[]
 	robotTrackerId=[] 
@@ -502,7 +499,7 @@ module SessionsHelper
 	rep=robotTrackerIdnil+rep
 	return rep
   end
-  
+=end  
     def sortRobotByTeam(tabRobotId)
 	rep=[]
 	robotTeamName=[]
@@ -539,12 +536,13 @@ module SessionsHelper
 		end
 		missionNamesSort=missionNames.sort
 		for i in 0 .. (missionNamesSort.size-1)
-			rep << Mission.find_by_name(missionNamesSort[i]).id # tout les membre qui on une team, trié
+			rep << Mission.find_by_name(missionNamesSort[i]).id 
 		end
 	end
 	return rep
   end
-  
+
+=begin  
      def sortMissionByType(tabMissionId)
 	rep=[]
 	officialMission=[]
@@ -566,19 +564,18 @@ module SessionsHelper
 	end
 	return rep
   end
-  
-  
-  def sortTryByTeam(tabTryId)
+=end 
+    def sortAttemptByTeam(tabAttemptId)
 	idsTeam=Team.ids
 	idsTeam=sortTeamByName(idsTeam)
 	repc=Array.new(idsTeam.length,[])
 	repnil=[]
-	for i in tabTryId
-		arf=Try.find_by_id(i)
-		if arf != nil
-			arf2=Robot.find_by_id(arf.robot_id)
-			if  arf2!= nil
-				indexId=idsTeam.index(arf2.team_id)
+	for i in tabAttemptId
+		attem=Attempt.find_by_id(i)
+		if attem != nil
+			rob=Robot.find_by_id(attem.robot_id)
+			if  rob!= nil
+				indexId=idsTeam.index(rob.team_id)
 				if indexId != nil
 					repc[indexId]=repc[indexId]+[i]
 				else
@@ -589,15 +586,14 @@ module SessionsHelper
 	end
 	rep=repnil+repc.flatten!
 	return rep
-  end
-  
-  
-  def sortTryByRobot(tabTryId)
+  end  
+
+  def sortAttemptByRobot(tabAttemptId)
 	idsRobots=Robot.ids
 	idsRobots=sortRobotByName(idsRobots)
 	repc=Array.new(idsRobots.length,[])
-	for i in tabTryId
-		arf=Try.find_by_id(i)
+	for i in tabAttemptId
+		arf=Attempt.find_by_id(i)
 		if arf != nil
 			indexId=idsRobots.index(arf.robot_id)
 			if indexId != nil
@@ -609,12 +605,12 @@ module SessionsHelper
 	return rep
   end
   
-  def sortTryByMission(tabTryId)
+  def sortAttemptByMission(tabAttemptId)
 	idsMissions=Mission.ids
 	idsMissions=sortMissionByName(idsMissions)
 	repc=Array.new(idsMissions.length,[])
-	for i in tabTryId
-		arf=Try.find_by_id(i)
+	for i in tabAttemptId
+		arf=Attempt.find_by_id(i)
 		if arf != nil
 			indexId=idsMissions.index(arf.mission_id)
 			if indexId != nil
@@ -626,24 +622,25 @@ module SessionsHelper
 	return rep
   end
   
-  def sortTryByName(tabTryId)
+  def sortAttemptByName(tabAttemptId)
 	rep=[]
 	allName=[]
-	if tabTryId != nil
-		for i in 0 .. (tabTryId.size-1)
-			if  Try.find_by_id(tabTryId[i]) != nil
-				allName << Try.find_by_id(tabTryId[i]).name
+	if tabAttemptId != nil
+		for i in 0 .. (tabAttemptId.size-1)
+			if  Attempt.find_by_id(tabAttemptId[i]) != nil
+				allName << Attempt.find_by_id(tabAttemptId[i]).name
 			end
 		end
 		namesSort=allName.sort
 		
 		for i in 0 .. (namesSort.size-1)
-			rep << tabTryId[allName.index(namesSort[i])]
+			rep << tabAttemptId[allName.index(namesSort[i])]
 		end
 	end	
 	return rep
   end
-  
+ 
+=begin 
     def sortTriesTeam(tabTryId)
 	idsTeam=Team.ids
 	idsTeam=sortTeamByName(idsTeam)
