@@ -1,6 +1,6 @@
 require 'yaml'
 require 'erb'
-puts "config_static.rb Start"
+puts "config_dynamic.rb Start"
 
 PATHFILE_YAML = "lib/generator/config_variables/"
 PATHFILE_IN ="lib/generator/template/"
@@ -24,4 +24,4 @@ outfile.write(output)
 outfile.close
 inputfile.close
 
-puts "config_log.rb End"
+puts "config_dynamic.rb End"

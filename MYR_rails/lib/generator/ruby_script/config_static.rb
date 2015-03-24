@@ -7,7 +7,7 @@ PATHFILE_IN ="lib/generator/templates/statics/"
 PATHFILE_OUT = "app/views/static_pages/"
 PATHFILE_OUT_LAYOUT = "app/views/layouts/"
 
-FILENAME_YAML = "config.yaml"
+FILENAME_YAML = "config_static.yaml"
 
 data = YAML::load(File.open(PATHFILE_YAML+FILENAME_YAML))
 
