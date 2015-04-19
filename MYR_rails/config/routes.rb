@@ -34,11 +34,14 @@ Rails.application.routes.draw do
     get 'choiceteams', to: 'real_time_old#choiceteams'
     get 'choicerobots', to: 'real_time_old#choicerobots'
     get 'updatemapp', to: 'real_time_old#updatemapp'
-
-
-    get 'real_time/show'
-
     get 'gatherCoords', to: 'coordinates#gatherCoords'
+
+    get 'real-time', to: 'real_time#show'
+
+    #ajax
+    get 'getMissionLength', to: 'real_time#getMissionLength'
+    get 'gatherCoordsBetweenDates', to: 'coordinates#gatherCoordsBetweenDates'
+    get 'gatherCoordsSince', to: 'coordinates#gatherCoordsSince'
 
     #get 'admin_markers/show'
     get 'mytest/mytest'

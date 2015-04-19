@@ -1,4 +1,11 @@
 class RealTimeController < ApplicationController
-  def show
-  end
+	include RealTimeHelper
+
+	def show
+	end
+
+	def getMissionLength
+		render json: getMissionInfos
+	end
+
 end

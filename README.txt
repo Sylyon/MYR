@@ -24,8 +24,8 @@ echo Creating database
 		rails g migration AddLongitudeToMarkers longitude:float
 		rails destroy scaffold home
 		rails generate controller StaticPages home contact
-
-
+		rails g migration AddStartToMissions start:datetime
+		rails g migration AddEndToMissions end:datetime
 echo migrating database
 rake db:migrate
 

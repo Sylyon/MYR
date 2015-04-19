@@ -1,6 +1,8 @@
 class CoordinatesController < ApplicationController
   before_action :set_coordinate, only: [:show, :edit, :update, :destroy]
 
+  include RealTimeHelper
+
   $numMaxCoords = 500
   #WARNING limitation is not the one required
   #TO DO global limitation of number of coordinates
@@ -65,9 +67,90 @@ class CoordinatesController < ApplicationController
     end
   end
 
-  def gatherCoords
+  def gatherCoordsSince
+    if (params[:datetime] != "0" && params[:datetime] != nil)#the map already contains coordinates
+      newCoords = Coordinate.where "datetime > ?", params[:datetime].to_datetime
+      #newCoords = limitCoordinates(newCoords)
+      render json: newCoords.to_json(:only =>[:tracker_id,:latitude,:longitude])
+    else #the map does not have any coordinates
+      start = getMissionInfos[0]
+      newCoords = Coordinate.where "datetime > ?", start.to_datetime
+      newCoords = limitCoordinates(newCoords)
+      render json: newCoords.to_json(:only =>[:tracker_id,:latitude,:longitude])
+    end
+  end
+
+  def gatherCoordsBetweenDates
+    if (params[:tstart] != nil && params[:tend] != nil)
+      tstart = params[:tstart].to_datetime
+      tend = params[:tend].to_datetime
+      newCoords = Coordinate.where "? <datetime AND datetime < ?", tstart, tend
+      render json: newCoords.to_json(:only =>[:tracker_id,:latitude,:longitude])
+    end
+  end
+
+  def limitCoordinates(coordinatesCustom)
+    #---------------------------- START Limite coordinate -----------------
+    
+    #count the number of trackers
+    if coordinatesCustom.size > 0
+      coords = coordinatesCustom.order(tracker_id: :asc) #sort coords by tracker_id
+      nbtra = 1 #give the number of trackers
+      coords.each_cons(2) do |element, next_element|
+        if next_element != element
+          nbtra = nbtra +1
+        end
+      end
+    end
+
+    mycoordinatesCustom=coordinatesCustom.reverse
+    sortie=[]
+    p=1 
+    q=1
+    nbpts=0
+    nbptsmax=125
+
+    tra=0
+
+    if mycoordinatesCustom != nil
+      for j in 0..mycoordinatesCustom.length-1
+        if mycoordinatesCustom[j]!= nil
+          if mycoordinatesCustom[j].tracker_id != tra
+            tra = mycoordinatesCustom[j].tracker_id
+            p=1
+            q=1
+            nbpts=0
+          end
+          if nbpts < nbptsmax/nbtra
+            if q%p == 0
+              sortie=sortie+[mycoordinatesCustom[j]]
+              nbpts=nbpts+1
+            end
+          end
+          if q>=60*p
+            p=10*p
+          end
+          q=q+1
+        end
+      end
+    end
+    return sortie.reverse
+  end
+    #---------------------------- FIN Limite coordinate -----------------
+=begin
+
+  def gatherCoordsBetweenDatesOld
+    if (params[:tstart] != nil && params[:tend] != nil)
+      tstart = params[:tstart].to_datetime
+      tend = params[:tend].to_datetime
+      newCoords = Coordinate.where "? <datetime AND datetime < ?", tstart, tend
+      render json: newCoords
+    end
+  end
+
+  def gatherCoordsOld
     if params[:datetime] != "0" #the map already contains coordinates
-      newCoords = Coordinate.where "datetime > ?", params[:datetime]
+      newCoords = Coordinate.where "datetime > ?", params[:datetime].to_datetime
       newCoords = limitCoord(newCoords)
       render json: newCoords
     else #the map does not have any coordinates
@@ -88,6 +171,7 @@ class CoordinatesController < ApplicationController
       return coords
     end
   end
+=end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -99,4 +183,4 @@ class CoordinatesController < ApplicationController
     def coordinate_params
       params.require(:coordinate).permit(:latitude, :longitude, :datetime, :tracker_id)
     end
-end
+  end
