@@ -1,50 +1,37 @@
 Rails.application.routes.draw do
 
-  #defauld root
+  # Default root
     root 'static_pages#home'  
 
   # Resources
     resources :coordinates
-
     resources :trackers
-
     resources :members
-
     resources :teams
-
     resources :robots
-
     resources :attempts
-
     resources :missions
-
     resources :markers
-  
-  # get
-  #work in progress
 
+  # GET
     get 'home', to: 'static_pages#home'
     get 'contact', to: 'static_pages#contact'
+    get 'real-time', to: 'real_time#show'
+
+  # Ajax
     get 'what', to: 'what#what'
-    get 'preview', to: 'test#create'
+    get 'getMissionLength', to: 'real_time#getMissionLength'
+    get 'gatherCoordsBetweenDates', to: 'coordinates#gatherCoordsBetweenDates'
+    get 'gatherCoordsSince', to: 'coordinates#gatherCoordsSince'
+    get 'markersCreation', to:'admin_markers#show'
 
-    get 'data', to: 'data#create'
-
+  # Old real time
     get 'real-time-old', to: 'real_time_old#show'
     get 'choiceteams', to: 'real_time_old#choiceteams'
     get 'choicerobots', to: 'real_time_old#choicerobots'
     get 'updatemapp', to: 'real_time_old#updatemapp'
     get 'gatherCoords', to: 'coordinates#gatherCoords'
 
-    get 'real-time', to: 'real_time#show'
-
-    #ajax
-    get 'getMissionLength', to: 'real_time#getMissionLength'
-    get 'gatherCoordsBetweenDates', to: 'coordinates#gatherCoordsBetweenDates'
-    get 'gatherCoordsSince', to: 'coordinates#gatherCoordsSince'
-
-    #get 'admin_markers/show'
-    get 'mytest/mytest'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
