@@ -17,13 +17,13 @@ Rails.application.routes.draw do
     get 'home', to: 'static_pages#home'
     get 'contact', to: 'static_pages#contact'
     get 'real-time', to: 'real_time#show'
+    get 'markersCreation', to:'admin_markers#show'
 
   # Ajax
     get 'what', to: 'what#what'
     get 'getMissionLength', to: 'real_time#getMissionLength'
     get 'gatherCoordsBetweenDates', to: 'coordinates#gatherCoordsBetweenDates'
     get 'gatherCoordsSince', to: 'coordinates#gatherCoordsSince'
-    get 'markersCreation', to:'admin_markers#show'
 
   # Old real time
     get 'real-time-old', to: 'real_time_old#show'

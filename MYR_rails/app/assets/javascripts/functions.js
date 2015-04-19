@@ -6,11 +6,11 @@ var lastDatetime = "0";
 
 //-------------------GUI----------------------------------------
 jQuery.expr.filters.offscreen = function(el) {
-  return (
-              (el.offsetLeft + el.offsetWidth) < 0 
-              || (el.offsetTop + el.offsetHeight) < 0
-              || (el.offsetLeft > window.innerWidth || el.offsetTop > window.innerHeight)
-         );
+	return (
+		(el.offsetLeft + el.offsetWidth) < 0 
+		|| (el.offsetTop + el.offsetHeight) < 0
+		|| (el.offsetLeft > window.innerWidth || el.offsetTop > window.innerHeight)
+		);
 };
 
 //-------------GETTERS AND SETTERS----------------------------
@@ -104,7 +104,7 @@ jQuery.expr.filters.offscreen = function(el) {
 		google.maps.event.addListener(map, 'click', function(a){
 			var desiredLat = a.latLng.lat();
 			var desiredLng = a.latLng.lng();
-			setCenter(desiredLat,desiredLng);
+			//setCenter(desiredLat,desiredLng);
 
 			var marker = addDraggableMarker(desiredLat,desiredLng);
 			google.maps.event.addListener(marker, 'dragend', function(a){
@@ -119,47 +119,46 @@ jQuery.expr.filters.offscreen = function(el) {
 			$("#AddBoil").click(function(){
 				alert(desiredLat+" and "+desiredLng);
 
-			//to be completed using partial or jquery UI
-			$.ajax({
-				url: '/markers',
-				type: 'POST',
-				data: $.param({
-					marker: {
-						name: "test"
-					}
-				}),
-				success: function(data) { alert("Marker has ben succesfully created"); }
+				//to be completed using partial or jquery UI
+				$.ajax({
+					url: '/markers',
+					type: 'POST',
+					data: $.param({
+						marker: {
+							name: "test2",
+							latitude: desiredLat,
+							longitude: desiredLng
+						}
+					}),
+					success: function(data) { alert("Marker has ben succesfully created"); }
 				});
-
+			});
 		});
-
-		}
-		);
-}
+	}
 
 //------------------------FROM SWARMON----------------------
 
 //------------------------------CHOICE TEAMS---------------------------------------
 //------------------------ ADD AND REMOVE TEAMS------------------------------------
 function addteam(id){
-  var str = $.cookie("teamslist");
-  if(isPresent(id,str) == true){
+	var str = $.cookie("teamslist");
+	if(isPresent(id,str) == true){
   }//do nothing
   else{
     //si le cookie est inexistant ou vide
     if($.cookie("teamslist") == null || $.cookie("teamslist") == ""){
-      $.cookie("teamslist",id);
-      }
+    	$.cookie("teamslist",id);
+    }
       //sinon ajout
-    else{
-      $.cookie("teamslist",$.cookie("teamslist")+","+id);
+      else{
+      	$.cookie("teamslist",$.cookie("teamslist")+","+id);
+      }
     }
   }
-}
 
-function rmvteam(id){
-  var str = $.cookie("teamslist");
-  var tab = str.split(",");
+  function rmvteam(id){
+  	var str = $.cookie("teamslist");
+  	var tab = str.split(",");
   //index de l'élément à retirer
   var index = tab.indexOf(id);
   if(index > -1){
@@ -173,41 +172,41 @@ function rmvteam(id){
 
 //-------------------------------------------------------------------------------
 function isPresent(id,str){
-  if (str == null || str == ""){
+	if (str == null || str == ""){
     return false; //absent
   }
   else{
-    var tab = str.split(",");
-    var index = tab.indexOf(id);
-    if(index > -1){
-      return true;
-    }
-    else{
-      return false;
-    }
+  	var tab = str.split(",");
+  	var index = tab.indexOf(id);
+  	if(index > -1){
+  		return true;
+  	}
+  	else{
+  		return false;
+  	}
   }
 }
 
 //----------------------------ADD AND REMOVE ROBOTS--------------------------------
 function addrobot(id){
-  var str = $.cookie("robotslist");
-  if(isPresent(id,str) == true){
+	var str = $.cookie("robotslist");
+	if(isPresent(id,str) == true){
   }//do nothing
   else{
     //si le cookie est inexistant ou vide
     if($.cookie("robotslist") == null || $.cookie("robotslist") == ""){
-      $.cookie("robotslist",id);
-      }
+    	$.cookie("robotslist",id);
+    }
       //sinon ajout
-    else{
-      $.cookie("robotslist",$.cookie("robotslist")+","+id);
+      else{
+      	$.cookie("robotslist",$.cookie("robotslist")+","+id);
+      }
     }
   }
-}
 
-function rmvrobot(id){
-  var str = $.cookie("robotslist");
-  var tab = str.split(",");
+  function rmvrobot(id){
+  	var str = $.cookie("robotslist");
+  	var tab = str.split(",");
   //index de l'élément à retirer
   var index = tab.indexOf(id);
   if(index > -1){
@@ -221,18 +220,18 @@ function rmvrobot(id){
 
 //-------------------------------------------------------------------------------
 function isPresent(id,str){
-  if (str == null || str == ""){
+	if (str == null || str == ""){
     return false; //absent
   }
   else{
-    var tab = str.split(",");
-    var index = tab.indexOf(id);
-    if(index > -1){
-      return true;
-    }
-    else{
-      return false;
-    }
+  	var tab = str.split(",");
+  	var index = tab.indexOf(id);
+  	if(index > -1){
+  		return true;
+  	}
+  	else{
+  		return false;
+  	}
   }
 }
 //-------------------------------------------------------------------------------
