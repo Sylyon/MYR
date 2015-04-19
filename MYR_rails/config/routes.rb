@@ -9,19 +9,12 @@ Rails.application.routes.draw do
 
   # Resources
 	  resources :coordinates
-
 	  resources :trackers
-
 	  resources :members
-
 	  resources :teams
-
 	  resources :robots
-
 	  resources :attempts
-
 	  resources :missions
-
 	  resources :markers
   
   # get
