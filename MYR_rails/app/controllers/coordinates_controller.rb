@@ -70,13 +70,15 @@ class CoordinatesController < ApplicationController
   def gatherCoordsSince
     if (params[:datetime] != "0" && params[:datetime] != nil)#the map already contains coordinates
       newCoords = Coordinate.where "datetime > ?", params[:datetime].to_datetime
-      #newCoords = limitCoordinates(newCoords)
-      render json: newCoords.to_json(:only =>[:tracker_id,:latitude,:longitude])
-    else #the map does not have any coordinates
-      start = getMissionInfos[0]
-      newCoords = Coordinate.where "datetime > ?", start.to_datetime
       newCoords = limitCoordinates(newCoords)
-      render json: newCoords.to_json(:only =>[:tracker_id,:latitude,:longitude])
+      render json: newCoords.to_json(:only =>[:tracker_id,:latitude,:longitude,:datetime])
+    else #the map does not have any coordinates
+      if getMissionInfos.size > 0 #if there is currently a mission
+        start = getMissionInfos[0]
+        newCoords = Coordinate.where "datetime > ?", start.to_datetime 
+        newCoords = limitCoordinates(newCoords)
+        render json: newCoords.to_json(:only =>[:tracker_id,:latitude,:longitude,:datetime])
+      end
     end
   end
 

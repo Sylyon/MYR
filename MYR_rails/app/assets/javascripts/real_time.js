@@ -4,9 +4,23 @@ $(document).ready(function(){
 	initializeMap();
 	initialScroll();
 
+	//gather newly added coordinates or add coordinates since begining of mission
+	$("#getNewCoordinates").click(function(){
+		$.ajax({
+			type: "GET",
+			url: "/gatherCoordsSince",
+			data: "datetime="+getLastDatetime(),
+			dataType: "json",
+			success: function(data){
+				if(data.length > 0){
+					refreshWithNewMarkers(data);
+				}
+			}       
+		});
+	});
 
-	$("#getMissionLength").click(function(){
-
+	/*
+	$("#getCoordinatesForCurrentMission").click(function(){
 		$.ajax({
 			type: "GET",
 			url: "/getMissionLength",
@@ -15,7 +29,6 @@ $(document).ready(function(){
 				if(data.length > 0){
 					start = data[0];
 					end = data[1];
-
 					$.ajax({
 						type: "GET",
 						url: "/gatherCoordsBetweenDates",
@@ -23,26 +36,16 @@ $(document).ready(function(){
 						data: { tstart: start, tend: end},
 						success: function(data){
 							if(data.length > 0){
-
-								console.log(data);
-
 								length = data.length;
-								for (i=0; i<length; i++)
-								{
-
-									refreshWithNewMarkers(data);
-								}
+								refreshWithNewMarkers(data);
 							}
 						}       
 					});
-
-
 				}
-
 			}       
 		});
-
-		});
+	});
+*/
 
 });
 //-----------------------------------------------------------------
