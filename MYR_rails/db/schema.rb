@@ -11,7 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310141909) do
+
+ActiveRecord::Schema.define(version: 20150312092135) do
+
 
   create_table "attempts", force: :cascade do |t|
     t.string   "name"
@@ -33,11 +35,6 @@ ActiveRecord::Schema.define(version: 20150310141909) do
     t.float    "longitude"
   end
 
-  create_table "homes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "markers", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -51,13 +48,13 @@ ActiveRecord::Schema.define(version: 20150310141909) do
 
   create_table "members", force: :cascade do |t|
     t.string   "name"
-    t.string   "password"
     t.string   "email"
     t.string   "role"
     t.string   "logo"
     t.integer  "team_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "password_digest"
   end
 
   create_table "missions", force: :cascade do |t|
@@ -77,12 +74,18 @@ ActiveRecord::Schema.define(version: 20150310141909) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string   "name"
     t.string   "logo"
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "leader_id"
   end
 
   create_table "trackers", force: :cascade do |t|

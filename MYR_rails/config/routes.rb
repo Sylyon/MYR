@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
+
   # Default root
+
     root 'static_pages#home'  
 
   # Resources
@@ -12,6 +14,12 @@ Rails.application.routes.draw do
     resources :attempts
     resources :missions
     resources :markers
+
+
+    resources :sessions
+  
+  # get
+  #work in progress
 
   # GET
     get 'home', to: 'static_pages#home'
@@ -33,6 +41,13 @@ Rails.application.routes.draw do
     get 'gatherCoords', to: 'coordinates#gatherCoords'
 
 
+
+  #math
+    match '/signup' => 'members#new', :via => [:get]
+  
+    match '/signin' => 'sessions#new', :via => [:get]
+  
+    match '/signout' => 'sessions#delete', :via => [:get]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

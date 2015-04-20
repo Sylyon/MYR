@@ -26,6 +26,13 @@ echo Creating database
 		rails generate controller StaticPages home contact
 		rails g migration AddStartToMissions start:datetime
 		rails g migration AddEndToMissions end:datetime
+		rails generate scaffold session
+		rails g migration AddPasswordDigestToMembers password_digest:string
+		rails g migration RemovePasswordFromMembers password:string
+		rails g migration AddLeaderToTeam leader_id:integer
+
+
+
 echo migrating database
 rake db:migrate
 
