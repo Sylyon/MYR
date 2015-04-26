@@ -1,7 +1,7 @@
 //----------------------GLOBAL VARIABLES-------------------
 var map = null;
 var lastDatetime = "0";
-var latest_markers = [];
+var latest_markers = [[],[]]; //[0] for markers and [1] for tracker id
 
 
 //----------------------FUNCTIONS---------------------------
@@ -51,6 +51,8 @@ jQuery.expr.filters.offscreen = function(el) {
 		map.panTo(new google.maps.LatLng(lat,lng));
 	}
 
+
+	//to complete
 	//Add a marker to the map
 	//tracker_id is optional with  default value of 12 for the rendering
 	function addMarker(lat, lng, tracker_id){
@@ -66,6 +68,26 @@ jQuery.expr.filters.offscreen = function(el) {
 		//always needed ?
 		marker.setMap(map);
 		//ADDED
+		return marker;
+	}
+
+	//Add a big marker to the map
+	//tracker_id is optional with  default value of 12 for the rendering
+	function addBigMarker(lat, lng, tracker_id){
+		tracker_id = typeof tracker_id !== 'undefined' ? tracker_id : 12;
+		var image = 'icons/medium'+tracker_id+'.png';
+
+		var marker = new google.maps.Marker(
+		{
+			position: new google.maps.LatLng(lat,lng),
+			icon: image
+		}
+		);
+		//always needed ?
+		marker.setMap(map);
+		//ADDED
+		latest_markers[0].push(marker);
+		latest_markers[1].push(tracker_id);
 		return marker;
 	}
 
@@ -113,13 +135,13 @@ jQuery.expr.filters.offscreen = function(el) {
 		var lastLat = lastCoordinate.latitude;
 		var lastLng= lastCoordinate.longitude;
 
-		addAllThisPolylines(data);
+		addAllThesePolylines(data);
 
 		setCenter(lastLat,lastLng);
 		saveLastDatetime(lastDate);
 	}
 
-	function addAllThisPolylines(data){
+	function addAllThesePolylines(data){
 		var tracker_Gcoords = []
 		for(var i=0; i < data.length ; i++){ //iterate in the array
 			latitude = data[i].latitude;
@@ -132,46 +154,39 @@ jQuery.expr.filters.offscreen = function(el) {
 					addMarker(latitude, longitude, tracker_id);
 				}
 				else{
-					//addsbigmarker
-					addMarker(latitude, longitude, tracker_id);
 					//create polyline
 					createPolyline(tracker_Gcoords, tracker_id);
+					//addsbigmarker
+					addBigMarker(latitude, longitude, tracker_id);
 					//reset array
 					tracker_Gcoords = [];
 				}
 			}
 			else{ //end of array
-				//addsbigmarker
-				addMarker(latitude, longitude, tracker_id);
 				//create polyline
 				createPolyline(tracker_Gcoords, tracker_id);
+				//addsbigmarker
+				addBigMarker(latitude, longitude, tracker_id);
 				//reset array
 				tracker_Gcoords = [];
 			}
 		}
 	}
 
-	function createPolyline(Gcoords, tracker_id){
+	function createPolyline(Gcoords, tracker_id, last_marker){
 
 		var index_of_marker = alreadyPresent(tracker_id);
-		var last_lat = Gcoords[Gcoords.length-1].latitude;
-		var last_lng = Gcoords[Gcoords.length-1].longitude;
 
 		if(index_of_marker != -1){
+			//get coords to add to polyline
+			var end_lat = latest_markers[0][index_of_marker].getPosition().lat();
+			var end_lng = latest_markers[0][index_of_marker].getPosition().lng();
+			Gcoords.unshift(new google.maps.LatLng(end_lat, end_lng));
+
 			//remove this marker from the map
-
-			//
+			//QUESTION better to replace the icon ??
+			deleteEndMarker(index_of_marker);
 		}
-
-		var temp_marker = new google.maps.Marker(
-		{
-			position: Gcoords[Gcoords.length-1]
-		}
-		);
-
-		var new_marker = [Gcoords[Gcoords.length-1],tracker_id];
-		//add the latest marker to the local memory for futur refresh
-		pushToLatestMarkers(new_marker);
 
 		var polyline = new google.maps.Polyline({
 	    path: Gcoords,
@@ -183,21 +198,15 @@ jQuery.expr.filters.offscreen = function(el) {
 	polyline.setMap(map);
 	}
 
-	function pushToLatestMarkers(new_marker){
-		var index = alreadyPresent(new_marker[1]);
-
-		if(index == -1){ //not present
-			latest_markers.push(new_marker);
-		}
-		else{
-			latest_markers[i] = new_marker;
-		}
+	function deleteEndMarker(index_of_marker){
+		latest_markers[0][index_of_marker].setMap(null);
+		latest_markers[0][index_of_marker] = [];
 	}
 
 	function alreadyPresent(tracker_id){
 		var index = -1;
-		for (var i = 0 ; i < latest_markers.length; i++) {
-			if (tracker_id == latest_markers[i][1]){ //already existing on the map
+		for (var i = 0 ; i < latest_markers[1].length; i++) {
+			if (tracker_id == latest_markers[1][i]){ //already existing on the map
 				index = i;
 			};
 		};
