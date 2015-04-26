@@ -13,7 +13,7 @@ $(document).ready(function(){
 			dataType: "json",
 			success: function(data){
 				if(data.length > 0){
-					refreshWithNewMarkers(data);
+					refreshWithNewMarkers2(data);
 				}
 			}       
 		});

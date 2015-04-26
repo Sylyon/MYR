@@ -1,6 +1,8 @@
 //----------------------GLOBAL VARIABLES-------------------
 var map = null;
 var lastDatetime = "0";
+var latest_markers = [];
+
 
 //----------------------FUNCTIONS---------------------------
 
@@ -50,11 +52,15 @@ jQuery.expr.filters.offscreen = function(el) {
 	}
 
 	//Add a marker to the map
-	//give one or two arguments ??
-	function addMarker(lat, lng){
+	//tracker_id is optional with  default value of 12 for the rendering
+	function addMarker(lat, lng, tracker_id){
+		tracker_id = typeof tracker_id !== 'undefined' ? tracker_id : 12;
+		var image = 'icons/medium'+tracker_id+'.png';
+
 		var marker = new google.maps.Marker(
 		{
-			position: new google.maps.LatLng(lat,lng)
+			position: new google.maps.LatLng(lat,lng),
+			icon: image
 		}
 		);
 		//always needed ?
@@ -78,10 +84,12 @@ jQuery.expr.filters.offscreen = function(el) {
 
 	//Add all the given coordinates onto the map
 	function addAllThisMarkers(data){
-		for(i=0; i < data.length ; i++){
+		var lat, lng, tracker_id = 0;
+		for(var i=0; i < data.length ; i++){
 			lat = data[i].latitude;
 			lng = data[i].longitude;
-			addMarker(lat,lng);
+			tracker_id = data[i].tracker_id;
+			addMarker(lat,lng,tracker_id);
 		}
 	}
 
@@ -96,6 +104,69 @@ jQuery.expr.filters.offscreen = function(el) {
 		setCenter(lastLat,lastLng);
 
 		saveLastDatetime(lastDate);
+	}
+
+	//Add the given coordiantes on the map and save this last state
+	function refreshWithNewMarkers2(data){
+		var lastCoordinate = data[data.length-1];
+		var lastDate = lastCoordinate.datetime;
+		var lastLat = lastCoordinate.latitude;
+		var lastLng= lastCoordinate.longitude;
+
+		addAllThisPolylines(data);
+
+		setCenter(lastLat,lastLng);
+		saveLastDatetime(lastDate);
+	}
+
+	function addAllThisPolylines(data){
+		var tracker_coords = []
+		for(var i=0; i < data.length ; i++){ //iterate in the array
+			if(i != data.length -1){ //not end of array
+				latitude = data[i].latitude;
+				longitude = data[i].longitude;
+				tracker_id = data[i].tracker_id;
+				tracker_coords.push(new google.maps.LatLng(latitude, longitude));
+				if(data[i].tracker_id == data[i+1].tracker_id){ //the same tracker
+					//addsmallmarker
+					addMarker(latitude, longitude, tracker_id);
+				}
+				else{
+					//addsbigmarker
+					addMarker(latitude, longitude, tracker_id);
+					//create polyline
+					createPolyline(tracker_coords);
+					//reset array
+					tracker_coords = [];
+				}
+			}
+			else{ //end of array
+				//create polyline
+				createPolyline(tracker_coords);
+				//reset array
+				tracker_coords = [];
+			}
+		}
+	}
+
+	function createPolyline(coords){
+		var current_tracker_id = coords[0].tracker_id;
+
+		var polyline = new google.maps.Polyline({
+	    path: coords,
+	    geodesic: true,
+	    strokeColor: '#FF0000',
+	    strokeOpacity: 1.0,
+	    strokeWeight: 2
+	  });
+	polyline.setMap(map);
+	}
+
+	function alreadyPresent(tracker_id){
+		for (var i = 0 ; i < latest_markers.length - 1; i++) {
+			latest_markers[i];
+		};
+
 	}
 
 	//Add a boil on the map when clicked and keep track of coordinates on dragend
