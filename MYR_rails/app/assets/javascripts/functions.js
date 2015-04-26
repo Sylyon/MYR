@@ -120,13 +120,13 @@ jQuery.expr.filters.offscreen = function(el) {
 	}
 
 	function addAllThisPolylines(data){
-		var tracker_coords = []
+		var tracker_Gcoords = []
 		for(var i=0; i < data.length ; i++){ //iterate in the array
+			latitude = data[i].latitude;
+			longitude = data[i].longitude;
+			tracker_id = data[i].tracker_id;
+			tracker_Gcoords.push(new google.maps.LatLng(latitude, longitude));
 			if(i != data.length -1){ //not end of array
-				latitude = data[i].latitude;
-				longitude = data[i].longitude;
-				tracker_id = data[i].tracker_id;
-				tracker_coords.push(new google.maps.LatLng(latitude, longitude));
 				if(data[i].tracker_id == data[i+1].tracker_id){ //the same tracker
 					//addsmallmarker
 					addMarker(latitude, longitude, tracker_id);
@@ -135,25 +135,46 @@ jQuery.expr.filters.offscreen = function(el) {
 					//addsbigmarker
 					addMarker(latitude, longitude, tracker_id);
 					//create polyline
-					createPolyline(tracker_coords);
+					createPolyline(tracker_Gcoords, tracker_id);
 					//reset array
-					tracker_coords = [];
+					tracker_Gcoords = [];
 				}
 			}
 			else{ //end of array
+				//addsbigmarker
+				addMarker(latitude, longitude, tracker_id);
 				//create polyline
-				createPolyline(tracker_coords);
+				createPolyline(tracker_Gcoords, tracker_id);
 				//reset array
-				tracker_coords = [];
+				tracker_Gcoords = [];
 			}
 		}
 	}
 
-	function createPolyline(coords){
-		var current_tracker_id = coords[0].tracker_id;
+	function createPolyline(Gcoords, tracker_id){
+
+		var index_of_marker = alreadyPresent(tracker_id);
+		var last_lat = Gcoords[Gcoords.length-1].latitude;
+		var last_lng = Gcoords[Gcoords.length-1].longitude;
+
+		if(index_of_marker != -1){
+			//remove this marker from the map
+
+			//
+		}
+
+		var temp_marker = new google.maps.Marker(
+		{
+			position: Gcoords[Gcoords.length-1]
+		}
+		);
+
+		var new_marker = [Gcoords[Gcoords.length-1],tracker_id];
+		//add the latest marker to the local memory for futur refresh
+		pushToLatestMarkers(new_marker);
 
 		var polyline = new google.maps.Polyline({
-	    path: coords,
+	    path: Gcoords,
 	    geodesic: true,
 	    strokeColor: '#FF0000',
 	    strokeOpacity: 1.0,
@@ -162,11 +183,25 @@ jQuery.expr.filters.offscreen = function(el) {
 	polyline.setMap(map);
 	}
 
-	function alreadyPresent(tracker_id){
-		for (var i = 0 ; i < latest_markers.length - 1; i++) {
-			latest_markers[i];
-		};
+	function pushToLatestMarkers(new_marker){
+		var index = alreadyPresent(new_marker[1]);
 
+		if(index == -1){ //not present
+			latest_markers.push(new_marker);
+		}
+		else{
+			latest_markers[i] = new_marker;
+		}
+	}
+
+	function alreadyPresent(tracker_id){
+		var index = -1;
+		for (var i = 0 ; i < latest_markers.length; i++) {
+			if (tracker_id == latest_markers[i][1]){ //already existing on the map
+				index = i;
+			};
+		};
+		return index;
 	}
 
 	//Add a boil on the map when clicked and keep track of coordinates on dragend
