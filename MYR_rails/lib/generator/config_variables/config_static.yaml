@@ -123,6 +123,7 @@ layout:
   metaTags: "<%= csrf_meta_tags %>"
   yield: "<%= yield %>"
   logo: "/stylesheets/images/default/logo.PNG"
+  favicon: "'/MYRicon.png'"
   tab:
     -
       name: *home_name
