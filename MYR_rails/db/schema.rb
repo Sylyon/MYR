@@ -33,6 +33,11 @@ ActiveRecord::Schema.define(version: 20150312092135) do
     t.float    "longitude"
   end
 
+  create_table "homes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "markers", force: :cascade do |t|
     t.string   "name"
     t.text     "description"

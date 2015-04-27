@@ -356,7 +356,7 @@ module SessionsHelper
 				elsif role == "player"
 					rep=rep+[tabId[i]]
 				
-				elsif role = "visitor"
+				elsif role == "visitor"
 					visitors << tabId[i]
 				end
 			end
@@ -463,7 +463,7 @@ module SessionsHelper
 				elsif cate == "Medium"
 					mediums << tabRobotId[i]
 				
-				elsif cate = "Big"
+				elsif cate == "Big"
 					bigs << tabRobotId[i]
 				elsif cate == "Motor"
 					motors << tabRobotId[i]
