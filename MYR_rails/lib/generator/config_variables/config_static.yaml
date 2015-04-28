@@ -28,7 +28,7 @@ sponsors:
 
 realTime:
   name: &realTime_name "Real Time"
-  link: &realTime_link "<%= members_path%>"
+  link: &realTime_link "<%= real_time_path%>"
 
 replay:
   name: &replay_name "Replay"
@@ -36,7 +36,7 @@ replay:
 
 login:
   name: &login_name "Login or Signin"
-  link: &login_link "<%= members_path%>"
+  link: &login_link "<%= signin_path%>"
 
 
 
