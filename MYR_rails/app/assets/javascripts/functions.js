@@ -30,19 +30,34 @@ jQuery.expr.filters.offscreen = function(el) {
 	function initializeMap() {
 		//map options
 		var mapOptions = {
-			center: { lat: -34.397, lng: 150.644},
-			zoom: 8
-		};
+			mapTypeId: google.maps.MapTypeId.HYBRID,
+			center: new google.maps.LatLng(53.2590145, -9.0294632),
+			zoom: 14,
+			zoomControl: true,
+			zoomControlOptions: {
+				style: google.maps.ZoomControlStyle.SMALL,
+				position: google.maps.ControlPosition.BOTTOM_LEFT
+			},
+			mapTypeControl: true,
+			mapTypeControlOptions: {
+				style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+				position: google.maps.ControlPosition.BOTTOM_LEFT
+			},
+			scaleControl: true,
+			streetViewControl: false,
+			panControl: false,
+			overviewMapControl: false
+		}
+
 		//map creation
-		map = new google.maps.Map(document.getElementById('map-canvas'),
-			mapOptions);
+		map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 	}
 
 	//scroll to top of button over the map
 	function initialScroll(){
 		$('html, body').animate({
 			//carefull on the name of the HTML object here
-			scrollTop: $("button").offset().top
+			scrollTop: $("#above_the_map").offset().top
 		}, 2000);
 	}
 
@@ -52,12 +67,34 @@ jQuery.expr.filters.offscreen = function(el) {
 	}
 
 
+	//Add a small marker to the map (a dot)
+	//tracker_id is optional with  default value of 12 for the rendering
+	function addSmallMarker(lat, lng, tracker_id){
+		tracker_id = typeof tracker_id !== 'undefined' ? tracker_id : 12;
+		var image = {
+			url: 'icons/dot'+tracker_id+'.png',
+			size: new google.maps.Size(5, 5),
+			origin: new google.maps.Point(0,0),
+			anchor: new google.maps.Point(3, 3)
+		};
+		var marker = new google.maps.Marker(
+		{
+			position: new google.maps.LatLng(lat,lng),
+			icon: image
+		}
+		);
+		//always needed ?
+		marker.setMap(map);
+		//ADDED
+		return marker;
+	}
+	/*
 	//to complete
 	//Add a marker to the map
 	//tracker_id is optional with  default value of 12 for the rendering
 	function addMarker(lat, lng, tracker_id){
 		tracker_id = typeof tracker_id !== 'undefined' ? tracker_id : 12;
-		var image = 'icons/medium'+tracker_id+'.png';
+		var image = 'icons/medium'+tracker_id%12+'.png';
 
 		var marker = new google.maps.Marker(
 		{
@@ -70,12 +107,12 @@ jQuery.expr.filters.offscreen = function(el) {
 		//ADDED
 		return marker;
 	}
-
+	*/
 	//Add a big marker to the map
 	//tracker_id is optional with  default value of 12 for the rendering
 	function addBigMarker(lat, lng, tracker_id){
 		tracker_id = typeof tracker_id !== 'undefined' ? tracker_id : 12;
-		var image = 'icons/medium'+tracker_id+'.png';
+		var image = 'icons/medium'+tracker_id%12+'.png';
 
 		var marker = new google.maps.Marker(
 		{
@@ -151,7 +188,7 @@ jQuery.expr.filters.offscreen = function(el) {
 			if(i != data.length -1){ //not end of array
 				if(data[i].tracker_id == data[i+1].tracker_id){ //the same tracker
 					//addsmallmarker
-					addMarker(latitude, longitude, tracker_id);
+					addSmallMarker(latitude, longitude, tracker_id);
 				}
 				else{
 					//create polyline
@@ -175,27 +212,31 @@ jQuery.expr.filters.offscreen = function(el) {
 
 	function createPolyline(Gcoords, tracker_id, last_marker){
 
+		// colors:  		   red  , blue   , dark green, orange  , black    , purple   , white  , pink , fluo green, dark red, yellow , turquoise
+		var colors = ['','#CC0000','#0000CC','#003300','#FF3300','#000000','#660099','#FFFFFF','#CC00CC','#00CC00','#660000','#FFFF00','#33FFFF']
 		var index_of_marker = alreadyPresent(tracker_id);
 
 		if(index_of_marker != -1){
 			//get coords to add to polyline
 			var end_lat = latest_markers[0][index_of_marker].getPosition().lat();
 			var end_lng = latest_markers[0][index_of_marker].getPosition().lng();
+			var end_tracker_id = latest_markers[1][index_of_marker];
 			Gcoords.unshift(new google.maps.LatLng(end_lat, end_lng));
 
 			//remove this marker from the map
 			//QUESTION better to replace the icon ??
 			deleteEndMarker(index_of_marker);
+			addSmallMarker(end_lat, end_lng, end_tracker_id);
 		}
 
 		var polyline = new google.maps.Polyline({
-	    path: Gcoords,
-	    geodesic: true,
-	    strokeColor: '#FF0000',
-	    strokeOpacity: 1.0,
-	    strokeWeight: 2
-	  });
-	polyline.setMap(map);
+			path: Gcoords,
+			geodesic: true,
+			strokeColor: colors[tracker_id%12],
+			strokeOpacity: 1.0,
+			strokeWeight: 1
+		});
+		polyline.setMap(map);
 	}
 
 	function deleteEndMarker(index_of_marker){

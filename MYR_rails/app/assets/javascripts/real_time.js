@@ -1,7 +1,8 @@
 $(document).ready(function(){
 
 	//initialization
-	initializeMap();
+	google.maps.event.addDomListener(window, 'load', initializeMap);
+	//initializeMap();
 	initialScroll();
 
 	//gather newly added coordinates or add coordinates since begining of mission
