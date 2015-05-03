@@ -301,3 +301,8 @@ table a, #comments a{background-color:inherit;}
 	text-shadow:1px 1px 0px #1570cd;
 	cursor:pointer;
 }
+
+#map-canvas{
+  width: 100%;
+  height: 80%;
+}
