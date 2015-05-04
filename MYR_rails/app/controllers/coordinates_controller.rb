@@ -70,13 +70,21 @@ class CoordinatesController < ApplicationController
   #retrieves coordinates (ordered by tracker_id) since the begining of the current missions or since the provided datetime
   def gatherCoordsSince
     if (params[:datetime] != "0" && params[:datetime] != nil)#the map already contains coordinates
-      newCoords = Coordinate.where "datetime > ?", params[:datetime].to_datetime
+      if (params[:trackers] != nil)# trackers identifiers are specified
+        newCoords = Coordinate.where("datetime > ?", params[:datetime].to_datetime).where(tracker_id: params[:trackers])
+      else
+        newCoords = Coordinate.where("datetime > ?", params[:datetime].to_datetime)
+      end
       newCoords = limitCoordinates(newCoords)
       render json: newCoords.to_json(:only =>[:tracker_id,:latitude,:longitude,:datetime])
     else #the map does not have any coordinates
       if getMissionInfos.size > 0 #if there is currently a mission
-        start = getMissionInfos[0]
-        newCoords = Coordinate.where "datetime > ?", start.to_datetime 
+        start = getMissionInfos[0] #missionsInfos = [start, end]
+        if (params[:trackers] != nil)# trackers identifiers are specified
+          newCoords = Coordinate.where("datetime > ?", start.to_datetime).where(tracker_id: params[:trackers])
+        else
+          newCoords = Coordinate.where("datetime > ?", start.to_datetime)
+        end
         newCoords = limitCoordinates(newCoords)
         render json: newCoords.to_json(:only =>[:tracker_id,:latitude,:longitude,:datetime])
       end
@@ -147,42 +155,6 @@ class CoordinatesController < ApplicationController
       return []
     end
   end
-    #---------------------------- FIN Limite coordinate -----------------
-=begin
-
-  def gatherCoordsBetweenDatesOld
-    if (params[:tstart] != nil && params[:tend] != nil)
-      tstart = params[:tstart].to_datetime
-      tend = params[:tend].to_datetime
-      newCoords = Coordinate.where "? <datetime AND datetime < ?", tstart, tend
-      render json: newCoords
-    end
-  end
-
-  def gatherCoordsOld
-    if params[:datetime] != "0" #the map already contains coordinates
-      newCoords = Coordinate.where "datetime > ?", params[:datetime].to_datetime
-      newCoords = limitCoord(newCoords)
-      render json: newCoords
-    else #the map does not have any coordinates
-      pastDatetime = 5.minutes.ago.strftime('%Y-%m-%d %H:%M:%S')
-      newCoords = Coordinate.where "datetime > ?", pastDatetime
-      newCoords = limitCoord(newCoords)
-      render json: newCoords
-    end
-  end
-
-  def limitCoord(coords)
-    if coords.length >= $numMaxCoords
-      #limitedNewCoord = coords - coords[0..coords.length - $numMaxCoords] 
-      #to test
-      limitedNewCoord = coords[coords.length - $numMaxCoords ..  coords.length] 
-      return limitedNewCoord
-    else
-      return coords
-    end
-  end
-=end
 
   private
     # Use callbacks to share common setup or constraints between actions.

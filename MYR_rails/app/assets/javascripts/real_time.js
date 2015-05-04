@@ -2,15 +2,23 @@ $(document).ready(function(){
 
 	//initialization
 	google.maps.event.addDomListener(window, 'load', initializeMap);
+
+	//display panel
+	$("#refresh-panel").click();
+
 	//initializeMap();
 	initialScroll();
 
+
 	//gather newly added coordinates or add coordinates since begining of mission
 	$("#getNewCoordinates").click(function(){
+
+		var trackers = [];
+
 		$.ajax({
 			type: "GET",
 			url: "/gatherCoordsSince",
-			data: "datetime="+getLastDatetime(),
+			data: {datetime : getLastDatetime(), trackers},
 			dataType: "json",
 			success: function(data){
 				if(data.length > 0){
