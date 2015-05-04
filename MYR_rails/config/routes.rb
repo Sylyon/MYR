@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     get 'getMissionLength', to: 'real_time#getMissionLength'
     get 'gatherCoordsBetweenDates', to: 'coordinates#gatherCoordsBetweenDates'
     get 'gatherCoordsSince', to: 'coordinates#gatherCoordsSince'
+    get 'map_panel', to: 'real_time#map_panel'
 
   # Old real time
     get 'real-time-old', to: 'real_time_old#show'
@@ -39,8 +40,6 @@ Rails.application.routes.draw do
     get 'choicerobots', to: 'real_time_old#choicerobots'
     get 'updatemapp', to: 'real_time_old#updatemapp'
     get 'gatherCoords', to: 'coordinates#gatherCoords'
-
-
 
   #math
     match '/signup' => 'members#new', :via => [:get]

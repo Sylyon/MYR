@@ -20,6 +20,11 @@ $(document).ready(function(){
 		});
 	});
 
+	$("#hidePanel").click(function(){
+		$("#map-container").toggleClass("fullscreen");
+		google.maps.event.trigger(map, 'resize');
+	});
+	
 	/*
 	$("#getCoordinatesForCurrentMission").click(function(){
 		$.ajax({

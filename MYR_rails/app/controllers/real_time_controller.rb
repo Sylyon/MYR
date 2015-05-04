@@ -8,4 +8,7 @@ class RealTimeController < ApplicationController
 		render json: getMissionInfos
 	end
 
+	def map_panel
+	end
+
 end

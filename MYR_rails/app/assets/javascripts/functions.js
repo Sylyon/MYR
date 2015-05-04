@@ -15,6 +15,13 @@ jQuery.expr.filters.offscreen = function(el) {
 		);
 };
 
+	//scroll to top of button over the map
+	function initialScroll(){
+		$('html, body').animate({
+			//carefull on the name of the HTML object here
+			scrollTop: $("#above_the_map").offset().top
+		}, 2000);
+	}
 //-------------GETTERS AND SETTERS----------------------------
 	//Setter on lastDatetime
 	function saveLastDatetime(datetime){
@@ -25,6 +32,32 @@ jQuery.expr.filters.offscreen = function(el) {
 	function getLastDatetime(){
 		return lastDatetime;
 	}
+
+//--------MAP----------------
+function FullScreenControl(controlDiv, map) {
+	//see https://developers.google.com/maps/documentation/javascript/examples/control-custom
+
+  // Set CSS for the control border
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundColor = '#fff';
+  //controlUI.style.border = '2px solid #fff';
+  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  controlUI.style.cursor = 'pointer';
+  controlUI.title = 'Click to hide the right panel';
+  controlDiv.appendChild(controlUI);
+
+  // Set image for the control interior
+  var controlImage = document.createElement('img');
+  controlImage.isMap = true;
+  controlImage.src = "/icons/expand-icon-small.PNG";
+  controlUI.appendChild(controlImage);
+
+  // Setup the click event listeners: change the class of the map container
+  google.maps.event.addDomListener(controlUI, 'click', function() {
+  	$("#map-container").toggleClass("fullscreen");
+  	google.maps.event.trigger(map, 'resize');
+  });
+}
 
 	//Map initialization
 	function initializeMap() {
@@ -51,15 +84,15 @@ jQuery.expr.filters.offscreen = function(el) {
 
 		//map creation
 		map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+		//add add button in the top right corner of the map to hide the right panel
+		var centerControlDiv = document.createElement('div');
+		var centerControl = new FullScreenControl(centerControlDiv, map);
+		centerControlDiv.index = 1;
+		map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv);
 	}
 
-	//scroll to top of button over the map
-	function initialScroll(){
-		$('html, body').animate({
-			//carefull on the name of the HTML object here
-			scrollTop: $("#above_the_map").offset().top
-		}, 2000);
-	}
+
 
 	//Set the center of the map
 	function setCenter(lat, lng){
