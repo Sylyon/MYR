@@ -3,7 +3,7 @@ class CoordinatesController < ApplicationController
 
   include RealTimeHelper
 
-  @@numMaxCoords = 500
+  NUM_MAX_COORDS = 1000 #constant
   #WARNING limitation is not the one required
   #TO DO global limitation of number of coordinates
 
@@ -70,23 +70,25 @@ class CoordinatesController < ApplicationController
   #retrieves coordinates (ordered by tracker_id) since the begining of the current missions or since the provided datetime
   def gatherCoordsSince
     if (params[:datetime] != "0" && params[:datetime] != nil)#the map already contains coordinates
+      datetime = params[:datetime].to_datetime
       if (params[:trackers] != nil)# trackers identifiers are specified
-        newCoords = Coordinate.where("datetime > ?", params[:datetime].to_datetime).where(tracker_id: params[:trackers])
+        trackers = params[:trackers]
+        # order(tracker_id: :asc)  is just here for performance boost -> prevent some action to be made js side by Google Map API
+        newCoords = (Coordinate.where(id: Coordinate.order(created_at: :desc).limit(NUM_MAX_COORDS))).where("datetime > ?", datetime).where(tracker_id: trackers).order(tracker_id: :asc).select(:datetime,:tracker_id,:latitude,:longitude)
       else
-        newCoords = Coordinate.where("datetime > ?", params[:datetime].to_datetime)
+        newCoords = (Coordinate.where(id: Coordinate.order(created_at: :desc).limit(NUM_MAX_COORDS))).where("datetime > ?", datetime).order(tracker_id: :asc).select(:datetime,:tracker_id,:latitude,:longitude)
       end
-      newCoords = limitCoordinates(newCoords)
-      render json: newCoords.to_json(:only =>[:tracker_id,:latitude,:longitude,:datetime])
+      render json: newCoords.to_json #(:only =>[:datetime,:tracker_id,:latitude,:longitude])  -> remove ID but is not a direct SQL request
     else #the map does not have any coordinates
       if getMissionInfos.size > 0 #if there is currently a mission
-        start = getMissionInfos[0] #missionsInfos = [start, end]
+        start = getMissionInfos[0].to_datetime #missionsInfos = [start, end]
         if (params[:trackers] != nil)# trackers identifiers are specified
-          newCoords = Coordinate.where("datetime > ?", start.to_datetime).where(tracker_id: params[:trackers])
+          trackers = params[:trackers]
+          newCoords = (Coordinate.where(id: Coordinate.order(created_at: :desc).limit(NUM_MAX_COORDS))).where("datetime > ?", start).where(tracker_id: trackers).order(tracker_id: :asc).select(:datetime,:tracker_id,:latitude,:longitude)
         else
-          newCoords = Coordinate.where("datetime > ?", start.to_datetime)
+          newCoords = (Coordinate.where(id: Coordinate.order(created_at: :desc).limit(NUM_MAX_COORDS))).where("datetime > ?", start).order(tracker_id: :asc).select(:datetime,:tracker_id,:latitude,:longitude)
         end
-        newCoords = limitCoordinates(newCoords)
-        render json: newCoords.to_json(:only =>[:tracker_id,:latitude,:longitude,:datetime])
+        render json: newCoords.to_json #(:only =>[:datetime,:tracker_id,:latitude,:longitude])  -> remove ID but is not a direct SQL request
       end
     end
   end
@@ -100,6 +102,8 @@ class CoordinatesController < ApplicationController
     end
   end
 
+  #input: array of coordinates
+  #output: aray of coordinates
   def limitCoordinates(coordinatesCustom)
     #---------------------------- START Limite coordinate ----------------
 
@@ -107,7 +111,7 @@ class CoordinatesController < ApplicationController
     if coordinatesCustom.size > 0
       coords = coordinatesCustom.order(tracker_id: :asc) #sort coords by tracker_id
 
-      if coordinatesCustom.size > @@numMaxCoords
+      if coordinatesCustom.size > NUM_MAX_COORDS
 
         nbtra = 1 #give the number of trackers
         coords.each_cons(2) do |element, next_element|

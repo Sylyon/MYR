@@ -9,11 +9,10 @@ $(document).ready(function(){
 	//initializeMap();
 	initialScroll();
 
-
 	//gather newly added coordinates or add coordinates since begining of mission
 	$("#getNewCoordinates").click(function(){
 
-		var trackers = [];
+		var trackers = [2,5,6];
 
 		$.ajax({
 			type: "GET",
@@ -27,6 +26,26 @@ $(document).ready(function(){
 			}       
 		});
 	});
+
+	//gather newly added coordinates or add coordinates since begining of mission
+	$("#getNewTrackers").click(function(){
+
+		var trackers = [2];
+
+		$.ajax({
+			type: "GET",
+			url: "/getNewTrackers",
+			data: {datetime : getLastDatetime(), trackers},
+			dataType: "json",
+			success: function(data){
+				if(data.length > 0){
+					alert(data);
+				}
+			}       
+		});
+	});
+
+});
 
 	/*
 	$("#getCoordinatesForCurrentMission").click(function(){
@@ -56,5 +75,4 @@ $(document).ready(function(){
 	});
 */
 
-});
 //-----------------------------------------------------------------
