@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
 	//initialization
 	google.maps.event.addDomListener(window, 'load', initializeMap);
 
@@ -12,12 +11,10 @@ $(document).ready(function(){
 	//gather newly added coordinates or add coordinates since begining of mission
 	$("#getNewCoordinates").click(function(){
 
-		var trackers = [2,5,6];
-
 		$.ajax({
 			type: "GET",
 			url: "/gatherCoordsSince",
-			data: {datetime : getLastDatetime(), trackers},
+			data: {datetime : getLastDatetime(), trackers: getKnownTrackers()},
 			dataType: "json",
 			success: function(data){
 				if(data.length > 0){
@@ -30,16 +27,15 @@ $(document).ready(function(){
 	//gather newly added coordinates or add coordinates since begining of mission
 	$("#getNewTrackers").click(function(){
 
-		var trackers = [2];
-
 		$.ajax({
 			type: "GET",
 			url: "/getNewTrackers",
-			data: {datetime : getLastDatetime(), trackers},
+			data: {datetime : getLastDatetime(), trackers: getKnownTrackers()},
 			dataType: "json",
-			success: function(data){
+			success: function(data){// retrieve an array containing the not yet known trackers
 				if(data.length > 0){
-					alert(data);
+					saveNewTracker(data);
+					alert("Received data: "+data);
 				}
 			}       
 		});

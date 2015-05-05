@@ -2,7 +2,13 @@
 var map = null;
 var lastDatetime = "0";
 var latest_markers = [[],[]]; //[0] for markers and [1] for tracker id
+var known_trackers = [];
 
+/*
+var tab = [2,12,1,5];
+tab.sort(function(a, b){return a-b});
+alert(tab);
+*/
 
 //----------------------FUNCTIONS---------------------------
 
@@ -22,6 +28,7 @@ jQuery.expr.filters.offscreen = function(el) {
 			scrollTop: $("#above_the_map").offset().top
 		}, 2000);
 	}
+
 //-------------GETTERS AND SETTERS----------------------------
 	//Setter on lastDatetime
 	function saveLastDatetime(datetime){
@@ -31,6 +38,19 @@ jQuery.expr.filters.offscreen = function(el) {
 	//Getter on lastDatetime
 	function getLastDatetime(){
 		return lastDatetime;
+	}
+
+	//Setter on known_trackers
+	function saveNewTracker(new_tracker){
+		var arrayLength = new_tracker.length;
+		for (var i = 0; i < arrayLength; i++) {
+			known_trackers.push(new_tracker[i]);
+		}
+	}
+
+	//Getter on lastDatetime
+	function getKnownTrackers(){
+		return known_trackers;
 	}
 
 //--------MAP----------------
@@ -155,9 +175,11 @@ function FullScreenControl(controlDiv, map) {
 		);
 		//always needed ?
 		marker.setMap(map);
-		//ADDED
+		// to ease later addition of coordinqtes
 		latest_markers[0].push(marker);
 		latest_markers[1].push(tracker_id);
+		// to create the side panel
+		known_trackers.push(tracker_id);
 		return marker;
 	}
 
