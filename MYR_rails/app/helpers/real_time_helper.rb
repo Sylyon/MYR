@@ -36,10 +36,11 @@ module RealTimeHelper
   #input: datetime, array of tracker_id
   #output: array of tracker-id
   def IsThereNewTrackers?(last_refresh, known_trackers)
+    trackers=[]
     if (last_refresh != "0" && last_refresh != nil)#the map already contains coordinates
       datetime = last_refresh.to_datetime
       newCoords = (Coordinate.where(id: Coordinate.order(created_at: :desc).limit(NUM_MAX_COORDS))).where("datetime > ?", datetime).where.not(tracker_id: known_trackers).order(tracker_id: :asc)
-      trackers = []
+      #trackers = []
       if (newCoords != [])
         newCoords.each_cons(2) do |element, next_element|
           if next_element.tracker_id != element.tracker_id
@@ -53,7 +54,7 @@ module RealTimeHelper
       if getMissionInfos.size > 0 #if there is currently a mission
         start = getMissionInfos[0].to_datetime #missionsInfos = [start, end]
         newCoords = (Coordinate.where(id: Coordinate.order(created_at: :desc).limit(NUM_MAX_COORDS))).where("datetime > ?", start).where.not(tracker_id: known_trackers).order(tracker_id: :asc)
-        trackers = []
+        #trackers = []
         if (newCoords != [])
           newCoords.each_cons(2) do |element, next_element|
             if next_element.tracker_id != element.tracker_id

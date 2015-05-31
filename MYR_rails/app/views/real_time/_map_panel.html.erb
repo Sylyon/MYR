@@ -20,15 +20,18 @@
 	<% end %>
 </p>
 <% end %>
+<h2>Trackers</h2>
+<p><%trackers = IsThereNewTrackers?("0", [])%></p>
+<%if trackers != nil%>
+	<%for track in trackers%>
+		<label class="checkboxtext"><input type="checkbox" id="Checkbox<%=track%>" class="custom">
+	<img src="/icons/medium<%=track%>.png"/ class="image_checkbox"> Tracker <%=track%></label>
+	<%end%>
+<%end%>
+<h2>Options</h2>
+<p>TODO</p>
 <% else %>
 <h1>No mission in progress currently.</h1>
 <p>Please come back later !</p>
 <% end %>
-<h2>Trackers</h2>
-<p><%trackers = IsThereNewTrackers?("0", [])%></p>
-<%for track in trackers%>
-	<label class="checkboxtext"><input type="checkbox" id="Checkbox<%=track%>" class="custom">
-<img src="/icons/medium<%=track%>.png"/ class="image_checkbox"> Tracker <%=track%></label>
-<%end%>
-<h2>Options</h2>
-<p>TODO</p>
+
