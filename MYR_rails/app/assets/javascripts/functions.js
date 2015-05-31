@@ -3,6 +3,7 @@ var map = null;
 var lastDatetime = "0";
 var latest_markers = [[],[]]; //[0] for markers and [1] for tracker id
 var known_trackers = [];
+var desired_trackers = [];
 
 /*
 var tab = [2,12,1,5];
@@ -41,16 +42,35 @@ jQuery.expr.filters.offscreen = function(el) {
 	}
 
 	//Setter on known_trackers
-	function saveNewTracker(new_tracker){
+	function saveNewKnownTracker(new_tracker){
 		var arrayLength = new_tracker.length;
 		for (var i = 0; i < arrayLength; i++) {
 			known_trackers.push(new_tracker[i]);
 		}
 	}
 
-	//Getter on lastDatetime
+	//Getter on known_trackers
 	function getKnownTrackers(){
 		return known_trackers;
+	}
+
+	//Setter on desired_trackers
+	function saveNewDesiredTracker(new_tracker){
+			desired_trackers.push(new_tracker);
+	}
+
+	function removeDesiredTracker(this_tracker){
+		//get index of the tracker
+		var index = desired_trackers.indexOf(this_tracker);
+  	if(index > -1){
+	    //remove this element
+	    desired_trackers.splice(index,1);
+		}
+	}
+
+	//Getter on desired_trackers
+	function getDesiredTrackers(){
+		return desired_trackers;
 	}
 
 //--------MAP----------------
@@ -309,6 +329,7 @@ function FullScreenControl(controlDiv, map) {
 		return index;
 	}
 
+//---------------------  BOILS  -----------------------------------
 	//Add a boil on the map when clicked and keep track of coordinates on dragend
 	//Save the coodinates in the database when clinking on "AddBoil" button
 	function addingBoil(){

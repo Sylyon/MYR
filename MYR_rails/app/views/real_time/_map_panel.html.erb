@@ -1,3 +1,9 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<%= javascript_include_tag 'map_panel', 'data-turbolinks-track' => true %>
+</head>
 <% missionsArray = getCurrentMission %>
 <% nbMissions = missionsArray.size %>
 <% if ( nbMissions > 0 ) %>
@@ -24,7 +30,7 @@
 <p><%trackers = IsThereNewTrackers?("0", [])%></p>
 <%if trackers != nil%>
 	<%for track in trackers%>
-		<label class="checkboxtext"><input type="checkbox" id="Checkbox<%=track%>" class="custom">
+		<label class="checkboxtext"><input name="tracker" type="checkbox" id="<%=track%>" class="custom">
 	<img src="/icons/medium<%=track%>.png"/ class="image_checkbox"> Tracker <%=track%></label>
 	<%end%>
 <%end%>
@@ -34,4 +40,4 @@
 <h1>No mission in progress currently.</h1>
 <p>Please come back later !</p>
 <% end %>
-
+</html>

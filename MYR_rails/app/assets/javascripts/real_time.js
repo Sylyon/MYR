@@ -10,7 +10,6 @@ $(document).ready(function(){
 
 	//gather newly added coordinates or add coordinates since begining of mission
 	$("#getNewCoordinates").click(function(){
-
 		$.ajax({
 			type: "GET",
 			url: "/gatherCoordsSince",
@@ -26,7 +25,6 @@ $(document).ready(function(){
 
 	//gather newly added coordinates or add coordinates since begining of mission
 	$("#getNewTrackers").click(function(){
-
 		$.ajax({
 			type: "GET",
 			url: "/getNewTrackers",
@@ -34,7 +32,7 @@ $(document).ready(function(){
 			dataType: "json",
 			success: function(data){// retrieve an array containing the not yet known trackers
 				if(data.length > 0){
-					saveNewTracker(data);
+					saveNewKnownTracker(data);
 					alert("Received data: "+data);
 				}
 			}       
