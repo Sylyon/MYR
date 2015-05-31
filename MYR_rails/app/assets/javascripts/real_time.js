@@ -13,7 +13,7 @@ $(document).ready(function(){
 		$.ajax({
 			type: "GET",
 			url: "/gatherCoordsSince",
-			data: {datetime : getLastDatetime(), trackers: getKnownTrackers()},
+			data: {datetime : getLastDatetime(), trackers: getDesiredTrackers()},
 			dataType: "json",
 			success: function(data){
 				if(data.length > 0){
@@ -39,7 +39,33 @@ $(document).ready(function(){
 		});
 	});
 
+	$("#map-panel").ready(function(){
+		alert("hello");
+
+$("#map-panel").on("click", "input[name*='tracker']", function() {
+  //for all checkboxes of tracker
+	//$( "input[name*='tracker']" ).each(function () {  
+    //on click do ...
+    $(this).click(function() {
+      //get id of the checkbox
+      var id = $(this).attr('id');
+      alert("My ID is "+id);
+      //if checked
+      if($(this).is(':checked')){
+        saveNewDesiredTracker(id);
+      }
+      //if not checked
+      else{
+        removeDesiredTracker(id);
+      } 
+    })
+  })
+
 });
+
+});
+
+
 
 	/*
 	$("#getCoordinatesForCurrentMission").click(function(){

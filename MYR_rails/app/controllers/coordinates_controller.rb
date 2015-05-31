@@ -76,7 +76,8 @@ class CoordinatesController < ApplicationController
         # order(tracker_id: :asc)  is just here for performance boost -> prevent some action to be made js side by Google Map API
         newCoords = (Coordinate.where(id: Coordinate.order(created_at: :desc).limit(NUM_MAX_COORDS))).where("datetime > ?", datetime).where(tracker_id: trackers).order(tracker_id: :asc).select(:datetime,:tracker_id,:latitude,:longitude)
       else
-        newCoords = (Coordinate.where(id: Coordinate.order(created_at: :desc).limit(NUM_MAX_COORDS))).where("datetime > ?", datetime).order(tracker_id: :asc).select(:datetime,:tracker_id,:latitude,:longitude)
+        #newCoords = (Coordinate.where(id: Coordinate.order(created_at: :desc).limit(NUM_MAX_COORDS))).where("datetime > ?", datetime).order(tracker_id: :asc).select(:datetime,:tracker_id,:latitude,:longitude)
+        newCoords = []
       end
       render json: newCoords.to_json #(:only =>[:datetime,:tracker_id,:latitude,:longitude])  -> remove ID but is not a direct SQL request
     else #the map does not have any coordinates
@@ -86,7 +87,8 @@ class CoordinatesController < ApplicationController
           trackers = params[:trackers]
           newCoords = (Coordinate.where(id: Coordinate.order(created_at: :desc).limit(NUM_MAX_COORDS))).where("datetime > ?", start).where(tracker_id: trackers).order(tracker_id: :asc).select(:datetime,:tracker_id,:latitude,:longitude)
         else
-          newCoords = (Coordinate.where(id: Coordinate.order(created_at: :desc).limit(NUM_MAX_COORDS))).where("datetime > ?", start).order(tracker_id: :asc).select(:datetime,:tracker_id,:latitude,:longitude)
+          #newCoords = (Coordinate.where(id: Coordinate.order(created_at: :desc).limit(NUM_MAX_COORDS))).where("datetime > ?", start).order(tracker_id: :asc).select(:datetime,:tracker_id,:latitude,:longitude)
+          newCoords = []
         end
         render json: newCoords.to_json #(:only =>[:datetime,:tracker_id,:latitude,:longitude])  -> remove ID but is not a direct SQL request
       end
