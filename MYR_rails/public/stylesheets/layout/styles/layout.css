@@ -304,13 +304,12 @@ table a, #comments a{background-color:inherit;}
 	cursor:pointer;
 }
 
-
-/* Dialogue alert */
-#edit_element_dialog fieldset 
-{
-	border:1px solid #ddd;
+#map-canvas{
+  width: 100%;
+  height: 100%;
 }
-#edit_element_dialog fieldset legend
-{
-	margin-left:20px;padding:1px;font-weight:bold;
+
+#map-container.fullscreen{
+	width: 100%;
+  height: 100%;
 }
