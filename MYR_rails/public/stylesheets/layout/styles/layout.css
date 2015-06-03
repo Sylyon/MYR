@@ -12,8 +12,6 @@ File: Layout CSS
 @import url("framework.css");
 
 
-
-
 /* Rows
 ---------------------------------------------------------------------------------------------------------------*/
 .row0, .row0 a{}
@@ -302,15 +300,4 @@ table a, #comments a{background-color:inherit;}
 	text-align:center;
 	text-shadow:1px 1px 0px #1570cd;
 	cursor:pointer;
-}
-
-
-/* Dialogue alert */
-#edit_element_dialog fieldset 
-{
-	border:1px solid #ddd;
-}
-#edit_element_dialog fieldset legend
-{
-	margin-left:20px;padding:1px;font-weight:bold;
 }
