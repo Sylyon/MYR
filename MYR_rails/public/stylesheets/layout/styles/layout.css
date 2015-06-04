@@ -301,3 +301,38 @@ table a, #comments a{background-color:inherit;}
 	text-shadow:1px 1px 0px #1570cd;
 	cursor:pointer;
 }
+
+#map-canvas{
+  width: 100%;
+  height: 100%;
+}
+
+#map-container.fullscreen{
+	width: 100%;
+  height: 100%;
+}
+
+input.custom{
+	display: inline;
+}
+
+input[type=checkbox]
+{
+  /* increase size of Checkboxes */
+  -ms-transform: scale(1.4) !important; /* IE */
+  -moz-transform: scale(1.4) !important; /* FF */
+  -webkit-transform: scale(1.4) !important; /* Safari and Chrome */
+  -o-transform: scale(1.4) !important; /* Opera */
+  padding: 10px;
+}
+
+.checkboxtext
+{
+  /* Increqse size of checkbox text */
+  font-size: 110%;
+}
+
+.image_checkbox
+{
+ vertical-align: bottom;
+}
