@@ -34,7 +34,6 @@ gem 'jbuilder', '~> 2.0'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'fastimage'
-gem 'thin'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

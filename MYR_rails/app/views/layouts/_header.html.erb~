@@ -15,14 +15,20 @@
 				</ul>
 				</li>
 				<% if sign_in(current_user) %>
-						<%=current_user.logo%>
+						<%= current_user.logo %>
+						<% if current_user.logo==nil || current_user.logo=="" %>
+							<img  src= "/stylesheets/images/demo/avatar.png" > 
+							true
+						<% else %>
+							<img  src= "<%= current_user.logo %>" > 
+						<% end %>
 						<%=current_user.name%>
 					<%=li_actif([teams_path,members_path]) %><a class="drop" href="#">My Account </a>
 					<ul>
 						<%=li_actif(teams_path) %><a href="<%= members_path %>"> My Team </a></li>		
-						<%=li_actif(members_path) %><a href="<%= members_path %>"> My Own Information </a></li>
+						<%=li_actif(members_path) %><a href="<%= members_path %>"> My Profil </a></li>
 					</ul>
-					<%=li_actif(members_path) %><a href="<%= signin_path %>"> Sign out </a></li>
+					<%=li_actif(members_path) %><a href="<%= signout_path %>"> Sign out </a></li>
 				<% else %>
 					<%=li_actif(members_path) %><a href="<%= signin_path %>"> Sign in </a></li>
 					<%=li_actif(members_path) %><a href="<%= signup_path %>"> Sign up </a></li>
