@@ -9,8 +9,8 @@
 </div>
   <p>
     <div class="field">
-		  <strong><%= f.label :name %></strong>
-		  <%= f.text_field :name %>
+		  <center><strong><%= f.label :name %></strong>
+		  <%= f.text_field :name %></center>
     </div>
     <br>
     

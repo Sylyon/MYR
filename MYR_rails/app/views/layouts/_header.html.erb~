@@ -1,0 +1,34 @@
+<div class="wrapper row1">
+	<header id="header" class="clear"> 
+		<!-- ################################################################################################ -->
+		<div id="logo" class="fl_left">
+			<h1><img class="imgTitleLogo" src= /stylesheets/images/default/logo.PNG > <a href="<%= home_path %>"> Default Title </a></h1>
+		</div>
+		<!-- ################################################################################################ -->
+		<nav id="mainav" class="fl_right">
+			<ul class="clear">
+				<%=li_actif(members_path) %><a href="<%= home_path %>"> Home </a></li>
+				<%=li_actif([coordinates_path,missions_path]) %><a class="drop" href="#">Follow a regatta</a>
+				<ul>
+					<%=li_actif(coordinates_path) %><a href="<%= real_time_path%>"> Real Time </a></li>
+					<%=li_actif(missions_path) %><a href="<%= replay_path%>"> Replay </a></li>	
+				</ul>
+				</li>
+				<% if sign_in(current_user) %>
+						<%=current_user.logo%>
+						<%=current_user.name%>
+					<%=li_actif([teams_path,members_path]) %><a class="drop" href="#">My Account </a>
+					<ul>
+						<%=li_actif(teams_path) %><a href="<%= members_path %>"> My Team </a></li>		
+						<%=li_actif(members_path) %><a href="<%= members_path %>"> My Own Information </a></li>
+					</ul>
+					<%=li_actif(members_path) %><a href="<%= signin_path %>"> Sign out </a></li>
+				<% else %>
+					<%=li_actif(members_path) %><a href="<%= signin_path %>"> Sign in </a></li>
+					<%=li_actif(members_path) %><a href="<%= signup_path %>"> Sign up </a></li>
+				<% end %>
+
+			</ul>
+		</nav>
+	</header>
+</div>

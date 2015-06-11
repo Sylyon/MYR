@@ -25,9 +25,6 @@ class MembersController < ApplicationController
   # POST /members.json
   def create
     if params[:member][:role] != "administrator" || (sign_in? && is_admin?)
-    	if params[:member][:logo]==nil
-    		params[:member][:logo]="http://portail.ensieta.fr/IMG/jpg/logo-ENSTA-Bretagne-Vertical-RVB.jpg";
-    	end
       @member = Member.new(member_params)
 
       respond_to do |format|

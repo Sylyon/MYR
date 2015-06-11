@@ -32,7 +32,6 @@ Rails.application.routes.draw do
     get 'gatherCoordsBetweenDates', to: 'coordinates#gatherCoordsBetweenDates'
     get 'gatherCoordsSince', to: 'coordinates#gatherCoordsSince'
     get 'rtmap_panel', to: 'real_time#rtmap_panel'
-    get 'map_panel', to: 'replay#map_panel'
     get 'getNewTrackers', to: 'real_time#getNewTrackers'
 
 
