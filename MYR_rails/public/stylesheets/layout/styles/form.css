@@ -1,7 +1,5 @@
-/*
-  Place all the styles related to the matching controller here.
-  They will automatically be included in application.css.
-*/
+/* forms */
+/*form for signin*/
 input{
   border: 1px solid #bbb;
   width: 60%;
@@ -26,3 +24,4 @@ input{
 	margin-left: auto;
 	margin-right: auto;
 }
+

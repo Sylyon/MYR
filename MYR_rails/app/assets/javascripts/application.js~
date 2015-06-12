@@ -14,4 +14,4 @@
 //= require jquery.cookie
 //= require jquery_ujs
 //= turbolinks
-//= require ./real_time
+//= require ./rtmap

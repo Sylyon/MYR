@@ -3,10 +3,3 @@
   They will automatically be included in application.css.
 */
 
-
-div{
-	&.field
-	text-align: center;
-	margin-left : auto;
-	margin-right : auto;
-}

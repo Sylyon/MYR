@@ -7,7 +7,7 @@
 		<!-- ################################################################################################ -->
 		<nav id="mainav" class="fl_right">
 			<ul class="clear">
-				<%=li_actif(members_path) %><a href="<%= home_path %>"> Home </a></li>
+				<%=li_actif(home_path) %><a href="<%= home_path %>"> Home </a></li>
 				<%=li_actif([coordinates_path,missions_path]) %><a class="drop" href="#">Follow a regatta</a>
 				<ul>
 					<%=li_actif(coordinates_path) %><a href="<%= real_time_path%>"> Real Time </a></li>
@@ -21,17 +21,19 @@
 							<img  src= "<%= current_user.logo %>" > 
 						<% end %>
 						<%=current_user.name%>
-					<%=li_actif([teams_path,members_path]) %><a class="drop" href="#">My Account </a>
-					<ul>
-						<%=li_actif(teams_path) %><a href="<%= members_path %>"> My Team </a></li>		
-						<%=li_actif(members_path) %><a href="<%= members_path %>"> My Profil </a></li>
-					</ul>
-					<%=li_actif(members_path) %><a href="<%= signout_path %>"> Sign out </a></li>
+						<%=li_actif([teams_path,members_path]) %><a class="drop" href="#">My Account </a>
+						<ul>
+							<%=li_actif(teams_path) %><a href="<%= members_path %>"> My Team </a></li>	
+							<% prefix=members_path%>	
+							<% postfix=current_user.id.to_s %>
+							<% current_user_path= prefix+'/'+postfix %>
+							<%=li_actif(members_path) %><a href="<%= current_user_path%>"> My Profil </a></li>
+						</ul>
+					<%=li_actif(signout_path) %><a href="<%= signout_path %>"> Sign out </a></li>
 				<% else %>
-					<%=li_actif(members_path) %><a href="<%= signin_path %>"> Sign in </a></li>
-					<%=li_actif(members_path) %><a href="<%= signup_path %>"> Sign up </a></li>
+					<%=li_actif(signin_path) %><a href="<%= signin_path %>"> Sign in </a></li>
+					<%=li_actif(signup_path) %><a href="<%= signup_path %>"> Sign up </a></li>
 				<% end %>
-
 			</ul>
 		</nav>
 	</header>
