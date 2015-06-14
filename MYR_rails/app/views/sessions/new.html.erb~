@@ -1,9 +1,7 @@
 
-<style type="text/css">
-	h1{text-align: center;}
-</style>
+<div id="newSession">
 <h1>New Session</h1>
-
+</div>
 <%= render 'form' %>
 
 

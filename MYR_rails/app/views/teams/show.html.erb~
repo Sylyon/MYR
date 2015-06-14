@@ -20,7 +20,7 @@
 	<% if @team.robot.size==0%>
 		 <%= @team.name%> has not created any robot yet !!!
 	<% else %>
-		<%= @team.name%> has <%= @team.robot.size %> robots 
+		You have <%= @team.robot.size %> robots 
 		<% @team.robot.each do |rob|%>
 			<%= rob.id%> <%= rob.name%>
 		<% end %>

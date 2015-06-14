@@ -19,7 +19,7 @@
         <% tm_path="/teams/"+team.id.to_s%>
         <td><%= link_to team.name , tm_path %></td>
         <!--<td><%= team.logo %></td>-->
-        <td><%= link_to team.logo , tm_path %></td>
+        <td><%= link_to tmname , tm_path %></td>
         <td><%= team.description %></td>
         <td><%= link_to 'Show', team %></td>
         <td><%= link_to 'Edit', edit_team_path(team) %></td>
