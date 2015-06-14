@@ -15,3 +15,6 @@
 //= require jquery_ujs
 //= turbolinks
 //= require ./real_time
+//= require ./modernizr.custom
+//= require ./classie
+//= require ./mlpushmenu
