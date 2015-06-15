@@ -10,6 +10,9 @@ class RealTimeController < ApplicationController
 
 	def map_panel
 	end
+	
+	def choiceteams
+	end
 
 	def getNewTrackers
 		last_refresh = params[:datetime]

@@ -1,24 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Teams</h1>
-<style type="text/css">
-table a:link {
-color:#FF0000;
-text-decoration:underline;
-}
-table a:visited {
-color:#00FF00;
-text-decoration:none;
-}
-table a:hover {
-color:#000000;
-text-decoration:none;
-}
-table a:active {
-color:#FFFFFF;
-text-decoration:none;
-} 
-</style>
+
 <table>
   <thead>
     <tr>

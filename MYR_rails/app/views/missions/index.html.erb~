@@ -26,7 +26,4 @@
 
 <br>
 
-
-<% if sign_in(current_user)%>
-	<%= link_to 'New Mission', new_mission_path %>
-<% end %>
+<%= link_to 'New Mission', new_mission_path %>

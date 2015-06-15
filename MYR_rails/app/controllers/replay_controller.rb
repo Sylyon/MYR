@@ -4,4 +4,5 @@ class ReplayController < ApplicationController
 	
 	def map_panel
 	end
+
 end

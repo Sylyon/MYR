@@ -8,7 +8,10 @@ class RealTimeController < ApplicationController
 		render json: getMissionInfos
 	end
 
-	def rtmap_panel
+	def map_panel
+	end
+	
+	def choice_teams
 	end
 
 	def getNewTrackers

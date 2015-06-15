@@ -28,7 +28,4 @@
 
 <br>
 
-
-<% if sign_in(current_user)%>
-	<%= link_to 'New Robot', new_robot_path %>
-<% end %>
+<%= link_to 'New Robot', new_robot_path %>

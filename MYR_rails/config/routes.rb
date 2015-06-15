@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     get 'rtmap_panel', to: 'real_time#rtmap_panel'
     get 'map_panel', to: 'replay#map_panel'
     get 'getNewTrackers', to: 'real_time#getNewTrackers'
+    
+    get 'choice_teams', to: 'real_time#choice_teams'
 
 
   # Authentication

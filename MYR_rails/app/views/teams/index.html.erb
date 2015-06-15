@@ -15,9 +15,9 @@
   <tbody>
     <% @teams.each do |team| %>
       <tr>
-        <!--<td><%= team.name %></td>-->
-        <% tm_path="/teams/"+team.id.to_s%>
-        <td><%= link_to team.name , tm_path %></td>
+      	<td><%= team.name %></td>
+        <!--<% tm_path="/teams/"+team.id.to_s%>
+        <td><%= link_to team.name , tm_path %></td>-->
         <!--<td><%= team.logo %></td>-->
         <td><%= link_to team.logo , tm_path %></td>
         <td><%= team.description %></td>
