@@ -1,7 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Teams</h1>
-
+<style type="text/css">
+table a:link {
+color:#FF0000;
+text-decoration:underline;
+}
+table a:visited {
+color:#00FF00;
+text-decoration:none;
+}
+table a:hover {
+color:#000000;
+text-decoration:none;
+}
+table a:active {
+color:#FFFFFF;
+text-decoration:none;
+} 
+</style>
 <table>
   <thead>
     <tr>
@@ -19,7 +36,7 @@
         <% tm_path="/teams/"+team.id.to_s%>
         <td><%= link_to team.name , tm_path %></td>
         <!--<td><%= team.logo %></td>-->
-        <td><%= link_to tmname , tm_path %></td>
+        <td><%= link_to team.logo , tm_path %></td>
         <td><%= team.description %></td>
         <td><%= link_to 'Show', team %></td>
         <td><%= link_to 'Edit', edit_team_path(team) %></td>
@@ -30,5 +47,6 @@
 </table>
 
 <br>
-
-<%= link_to 'New Team', new_team_path %>
+<% if sign_in(current_user)%>
+	<%= link_to 'New Team', new_team_path %>
+<% end %>

@@ -16,18 +16,17 @@
 				<nav id="mp-menu" class="mp-menu">
 					<div class="mp-level">
 						<ul>
-							<li class="icon icon-arrow-left">
-								<a class="icon icon-display" href="#">Teams</a>
-								
-							<!--	<div class="mp-level">
-									<h2 class="icon icon-display">Devices</h2>
-								</div>-->
+							<li class="icon ">
+								<% myteam_path="/members/"+current_user.id.to_s %>
+								<a class="icon icon-my-team" href=<%= myteam_path %>>My Team</a>
 							</li>
-							<li class="icon icon-arrow-left">
-								<a class="icon icon-news" href="#">Robots</a>
+							
+							<li class="icon ">
+								<a class="icon icon-robots" href="/robots">Robots</a>
 							</li>
-							<li class="icon icon-arrow-left">
-								<a class="icon icon-shop" href="#">Missions</a>
+							
+							<li class="icon ">
+								<a class="icon icon-missions" href="/missions">Missions</a>
 							</li>
 						</ul>
 					</div>
@@ -43,7 +42,6 @@
 							
 							<p>
 								<strong>Name:</strong> <%= @member.name %>
-								
 							</p>
 
 							<p>
@@ -79,14 +77,8 @@
 							
 						</div>
 					</div><!-- /scroller-inner -->
-					
-					
 				</div><!-- /scroller -->
-			
-
 			</div><!-- /pusher -->
-			
-			
 		</div><!-- /container -->
 		<script src="js/classie.js"></script>
 		<script src="js/mlpushmenu.js"></script>

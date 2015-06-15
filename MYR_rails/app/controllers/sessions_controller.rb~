@@ -27,8 +27,8 @@ class SessionsController < ApplicationController
   if user == true
     sign_in(Member.find_by_name(params[:session][:name]))
     #flash[:success] = params[:session][:name]+" is connected"
-    format.html { redirect_to @session, notice: 'Sessions was successfully created.' }
-    format.json { render :show, status: :created, location: @session }
+    user_path='/members/'+params[:session][:id]
+    redirect_to user_path
 
   elsif user==-1
     flash.now[:error] = "Invalid Password."
