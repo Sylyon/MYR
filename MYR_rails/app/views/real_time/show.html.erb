@@ -24,11 +24,17 @@
 		</style>
 		
 		<div class="one_third" style='height: 100%'>
-			<div id="rtmap-panel"></div>
-			<a id="refresh-rtpanel" href<%= link_to "REFRESH PANEL", :action => :rtmap_panel, remote: true%></a>
 			<div id="choice_teams"></div>
-			<a id="refresh-choice_teams" href<%= link_to "what the fuck", :action => :choice_teams, remote: true%></a>
+			<a id="refresh-choice_teams" href<%= link_to "Select a team", :action => :choice_teams, remote: true%></a>
 			<br>
+			
+			<div id="choice_robots"></div>
+			<a id="refresh-choice_robots" href<%= link_to "Select a robot", :action => :choice_robots, remote: true%></a>
+			<br>
+			
+			<div id="map-panel"></div>
+			<a id="refresh-panel" href<%= link_to "REFRESH PANEL", :action => :map_panel, remote: true%></a>
+			
 			<button id="getNewTrackers" type="button">Get trackers</button> 
 			<button id="getNewCoordinates" type="button">Get coordinates</button> 
 		</div>
