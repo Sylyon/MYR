@@ -8,7 +8,6 @@
         <% end %>
         <%if @tabteams.index(team.id.to_s) != nil %>
           <%Robot.where(team_id: team.id).each do |rob|%>
-            <div>&nbsp;</div>
           <% end %>
           <div>&nbsp;</div>
         <%end%>   

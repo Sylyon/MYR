@@ -1,9 +1,8 @@
 class Robot < ActiveRecord::Base
 # Associations
 belongs_to :team
-has_many :attempts		
-has_many :missions, through: :attempts		
-has_many :trackers, through: :attempts		
+has_many :attempt		
+has_many :mission, through: :attempt				
 
 
 # Validations

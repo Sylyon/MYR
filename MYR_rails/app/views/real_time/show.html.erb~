@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html>
+
 <head>
 	<%= javascript_include_tag 'real_time', 'data-turbolinks-track' => true %>
+</head>
+
 	<style type="text/css">
 		#map_frame_container{
 			margin-left:10px;
 			margin-top: 10px;
 		}
 	</style>
-	
-</head>
-<body>
+
 	<div id="above_the_map">
 </div>
 
@@ -24,12 +23,13 @@
 		</style>
 		
 		<div class="one_third" style='height: 100%'>
-			<div id="choice_teams"></div>
-			<a id="refresh-choice_teams" href<%= link_to "Select a team", :action => :choice_teams, remote: true%></a>
+			<% button_to 'Select a team', :action => :choice_teams, remote: true, :method => :get %>
+			<p id="choice_teams"></p>
 			<br>
-			
+
+			<button id="button_choice_robots" type="button">Select a Robot</button>
+			<a id="refresh-choice_robots" href<%= link_to "Select a robot:", :action => :choice_robots, remote: true%></a>
 			<div id="choice_robots"></div>
-			<a id="refresh-choice_robots" href<%= link_to "", :action => :choice_robots, remote: true%></a>
 			<br>
 			
 			<div id="map-panel"></div>
@@ -39,5 +39,4 @@
 			<button id="getNewCoordinates" type="button">Get coordinates</button> 
 		</div>
 	</div> 
-</body>
-</html>
+
